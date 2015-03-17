@@ -1,0 +1,123 @@
+#
+# bspwm hotkeys
+#
+
+# Quit bspwM
+super + alt + Escape
+	bspc quit
+
+# Close current window
+super + w
+	bspc window -c
+
+# Toggle to next layout of current desktop
+super + t
+	bspc desktop -l next
+
+# Balance window splits of the current desktop
+super + b
+	bspc desktop -B
+
+# Toggle {floating, fullscree} of current window
+super + {s,f}
+	bspc window -t {floating,fullscreen}
+
+# Focus last {window, desktop}
+super + {grave,Tab}
+	bspc {window,desktop} -f last
+
+# Increase/Decrease window gap
+super + {minus, equal}
+        bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+# Swap last focused window with current window
+super + apostrophe
+	bspc window -s last
+
+# Like vim's C-o and C-i except with window focus
+super + {o,i}
+	bspc control --record-history off; \
+	bspc window {older,newer} -f; \
+	bspc control --record-history on
+
+# Open transplant current window to last manual window
+super + y
+	bspc window -w last.manual
+
+# Swap current window with the biggest window
+super + m
+	bspc window -s biggest
+
+# {focus or swap} with window {DIR}
+super + {_,shift + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right}
+
+# Focus {next or prev} window
+super + {n,p}
+	bspc window -f {next,prev}
+
+# Circulate the leaves {backward, foward} of current desktop
+super + {comma,period}
+	bspc desktop -C {backward,forward}
+
+# Switch focus to {left or right} desktop
+ctrl + alt + bracket{left,right}
+	bspc desktop -f {prev,next}
+
+# Swich window to manual splitting with preselect {DIR}
+super + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+# Cancel {window or desktop} manual splitting preselection
+super + ctrl + {_,shift + }space
+	bspc {window -p cancel,desktop -c}
+
+# Increase the size of the current window by 10 pixels in {DIR}
+super + alt + {h,j,k,l}
+	bspc window -e {left -10,down +10,up -10,right +10}
+# Decrese the size of the current window by 10 pixels in {DIR}
+super + alt + shift + {h,j,k,l}
+	bspc window -e {right -10,up +10,down -10,left +10}
+
+# Change the splitting ration of the current window to {PERCENT}
+super + ctrl + {1-9}
+	bspc window -r 0.{1-9}
+
+# Send window or focus to desktop {NUM}
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,window -d} ^{1-9,10}
+
+# Select window focus with mouse
+~button1
+	bspc pointer -g focus
+
+# {Move, resize-side, resize-corner} of window with mouse button {1-3}
+super + button1
+        bspc pointer -g move
+
+super + ctrl + button1
+        bspc pointer -g resize_side
+
+super + alt + button1
+        bspc pointer -g resize_corner
+
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+	urxvt
+
+super + space
+	~/.config/dmenu/dmenu-bind.sh
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd

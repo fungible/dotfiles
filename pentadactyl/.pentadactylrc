@@ -1,0 +1,39 @@
+"1.2pre
+
+group user
+
+" MAPPINGS
+map -count -modes=n d <Nop>
+map -count -modes=n u <Nop>
+map -count -modes=n,v U -builtin <count>u
+map -count -modes=n,v x -builtin <count>d
+
+" OPTIONS
+set defsearch=startpage-https
+set guioptions+=n
+set wildmode=list:longest,full
+set hintmatching=wordstartswith
+set hlfind
+set newtab=extoptions,help
+set passkeys=youtube.com:jkl
+set popups=resized
+set titlestring=Firefox
+set visualbell
+set strictfocus^=google.com:laissez-faire
+
+" USER-COMMANDS
+command -nargs=* ddg open duckduckgo <args>
+command -nargs=* wiki open wikipedia-en <args>
+
+" HIGHLIGHTS && COLORSCHEMES
+colorscheme solarized-dark
+highlight FontFixed
+   \ /* The font used for fixed-width fonts */
+   \ font-family: Liberation Mono !important;
+   \ font-size: 11px !important;
+highlight FontCode
+   \ /* The font used for code listings */
+   \ font-family: Liberation Mono !important;
+   \ font-size: 11px !important;
+
+" vim: set ft=pentadactyl:

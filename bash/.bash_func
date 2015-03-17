@@ -1,0 +1,34 @@
+#-------------------------------------------------------------------------------
+# FILE FOR BASH FUNCTIONS
+# ~/.bash_func
+# SOURCED BY ~/.bashrc
+#-------------------------------------------------------------------------------
+
+
+# SHOW WHAT ENVIRONMENT VARS ARE AVAILABLE TO A SPECIFIC PROCESS
+envof() { sudo sed 's/\x0/\n/g' /proc/${1}/environ; }
+
+# SIMPLE CALCULATOR
+calc() { echo "scale=3;$@" | bc -l; }
+
+# SIMPLE TASK UTILITY AND NOTE TAKER
+todo() {
+    if [[ ! -f $HOME/.todo ]]; then
+        touch "$HOME/.todo"
+    fi
+
+    if ! (($#)); then
+        cat "$HOME/.todo"		# NO args print tasks
+    elif [[ "$1" == "-l" ]]; then
+        nl -b a "$HOME/.todo"		# -l : numbered print tasks 
+    elif [[ "$1" == "-c" ]]; then
+        > $HOME/.todo			# -c : clear tasks 
+    elif [[ "$1" == "-r" ]]; then
+        nl -b a "$HOME/.todo"		# -r : remove numbered task
+        echo '--------------------------------'
+        read -p "Type a number to remove: " number
+        sed -i -e "{ ${number}d }" "$HOME/.todo"
+    else
+        printf "%s\n" "$*" >> "$HOME/.todo"	#  append args to task
+    fi
+}

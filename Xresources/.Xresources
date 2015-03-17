@@ -1,0 +1,155 @@
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+
+! Dark
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+
+! define S_base03        #fdf6e3
+! define S_base02        #eee8d5
+! define S_base01        #93a1a1
+! define S_base00        #839496
+! define S_base0         #657b83
+! define S_base1         #586e75
+! define S_base2         #073642
+! define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            S_base03
+
+!URxvt*.depth:                   32
+*background:              S_base03
+*foreground:              S_base0
+*fading:                  20
+*fadeColor:               #000000
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1
+
+*color0:                  S_base02
+*color1:                  S_red
+*color2:                  S_green
+*color3:                  S_yellow
+*color4:                  S_blue
+*color5:                  S_magenta
+*color6:                  S_cyan
+*color7:                  S_base2
+*color8:                  S_base03
+*color9:                  S_orange
+*color10:                 S_base01
+*color11:                 S_base00
+*color12:                 S_base0
+*color13:                 S_violet
+*color14:                 S_base1
+*color15:                 S_base3
+
+!! Urxvt settings -------------------------------------------------------------
+!!-- OVERRIDE WITH SOLARIZED
+!URxvt*background: Black
+!URxvt*colorUL: yellow
+!URxvt*foreground: White
+!URxvt*loginShell: true
+!URxvt*scrollTtyKeypress: true
+!URxvt*skipScroll: true
+!URxvt*termName: screen-256color
+!URxvt*underlineColor: yellow
+
+!!-- Override infinality dpi of 96 with native dpi of 107
+Xft.dpi: 107
+
+!!-- Source Code Pro Font
+!URxvt*font: xft:Source Code Pro for Powerline:Regular:pixelsize=10
+!URxvt*boldFont: xft:Source Code Pro:Semibold:size=7
+!URxvt*italicFont: xft:Source Code Pro:Italic:size=7
+!URxvt*boldItalicFont: xft:Source Code Pro:Bold Italic:size=7
+
+!!-- ProggySquareSZ Font
+URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16
+URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16
+URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:Italic:pixelsize=16
+URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=16
+
+!!-- Meslo LG S font
+!URxvt*font: xft:Meslo LG S for Powerline:pixelsize=10
+!URxvt*boldFont: xft:Meslo LG S for Powerline:Bold:pixelsize=10
+!URxvt*italicFont: xft:Meslo LG S for Powerline:Italic:pixelsize=10
+!URxvt*boldItalicFont: xft:Meslo LG S for Powerline:Bold Italic:pixelsize=10
+
+!!-- Anonymous Pro Font
+!URxvt*font: xft:Anonymous Pro for Powerline:pixelsize=11
+!URxvt*boldFont: xft:Anonymous Pro for Powerline:bold:pixelsize=11
+!URxvt*italicFont: xft:Anonymous Pro for Powerline:italic:pixelsize=11
+!URxvt*boldItalicFont: xft:Anonymous Pro for Powerline:bold:italic:pixelsize=11
+
+!!-- DejaVu Sans Mono Font
+!URxvt*font: xft:DejaVu Sans Mono for Powerline:Regular:size=6.5
+!URxvt*boldFont: xft:DejaVu Sans Mono:bold:size=6.5
+!URxvt*italicFont: xft:DejaVu Sans Mono for Powerline:italic:size=6.5
+!URxvt*boldItalicFont: xft:DejaVu Sans Mono for Powerline:bold:italic:size=6.5
+
+!!-- Liberation Mono Font
+!URxvt*font: xft:Liberation Mono for Powerline:pixelsize=10
+
+
+URxvt*intensityStyles: false
+URxvt*borderLess: false
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*hold: false
+URxvt*letterSpace: -1
+URxvt*mapAlert: true
+URxvt*mouseWheelScrollPage: true
+URxvt*perl-ext-common: default,matcher,selection-to-clipboard,theme-switch
+URxvt*perl-ext:
+URxvt*print-pipe: cat > $HOME/$(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+URxvt*saveLines: 0
+URxvt*scrollBar: false
+URxvt*scrollBar_floating: false
+URxvt*scrollBar_right: false
+URxvt*scrollTtyOutput: true
+URxvt*scrollWithBuffer: true
+URxvt*scrollstyle: plain
+URxvt*secondaryScreen: true
+URxvt*secondaryScroll: true
+URxvt*urgentOnBell: false
+URxvt*utmpInhibit: false
+URxvt*visualBell: false
+URxvt*iso14755: false
+URxvt*iso14755_52: false
+URxvt*url-launcher: /usr/bin/firefox
+
+!! Settings for theme-switch script
+!URxvt.theme-switch.themedir: ~/.urxvt/themes
+!URxvt.keysym.F3: perl:theme-switch:prev
+!URxvt.keysym.F4: perl:theme-switch:next
+!URxvt.theme-switch.state-file: ~/.urxvt/.theme.state
+!URxvt.keysym.F5: perl:theme-switch:save-state
+!URxvt.keysym.F6: perl:theme-switch:load-state
