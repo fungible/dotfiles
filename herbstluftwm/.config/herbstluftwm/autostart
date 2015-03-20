@@ -18,7 +18,7 @@ Mod=Mod4   # Use the super key as the main modifier
 
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
-hc keybind $Mod-Shift-c close
+hc keybind $Mod-w close
 hc keybind $Mod-Return spawn urxvt
 hc keybind $Mod-space spawn $HOME/.config/dmenu/dmenu-bind.sh
 
@@ -95,9 +95,10 @@ hc mousebind $Mod-Control-Button1 zoom
 
 # focus
 hc keybind $Mod-BackSpace   cycle_monitor
-hc keybind $Mod-Tab         cycle_all +1
-hc keybind $Mod-Shift-Tab   cycle_all -1
-hc keybind $Mod-c cycle
+hc keybind $Mod-Tab         cycle_frame +1
+hc keybind $Mod-Shift-Tab   cycle_frame -1
+hc keybind $Mod-n cycle +1
+hc keybind $Mod-p cycle -1
 hc keybind $Mod-i jumpto urgent
 
 # theme
