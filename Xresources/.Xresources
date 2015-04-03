@@ -92,8 +92,8 @@ Xft.dpi: 107
 !URxvt*boldItalicFont: xft:Source Code Pro:Bold Italic:size=7
 
 !!-- ProggySquareSZ Font
-URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16
-URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16
+URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16:antialias=0:hinting=0
+URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16:antialias=0:hinting=0
 URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:Italic:pixelsize=16
 URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=16
 
@@ -103,20 +103,17 @@ URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=1
 !URxvt*italicFont: xft:Meslo LG S for Powerline:Italic:pixelsize=10
 !URxvt*boldItalicFont: xft:Meslo LG S for Powerline:Bold Italic:pixelsize=10
 
-!!-- Anonymous Pro Font
-!URxvt*font: xft:Anonymous Pro for Powerline:pixelsize=11
-!URxvt*boldFont: xft:Anonymous Pro for Powerline:bold:pixelsize=11
-!URxvt*italicFont: xft:Anonymous Pro for Powerline:italic:pixelsize=11
-!URxvt*boldItalicFont: xft:Anonymous Pro for Powerline:bold:italic:pixelsize=11
+!!-- Anonymous Pro Font #no powerline patch
+!URxvt*font: xft:Anonymous Pro:Regular:pixelsize=12
+!URxvt*boldFont: xft:Anonymous Pro:Bold:pixelsize=12
+!URxvt*italicFont: xft:Anonymous Pro:Italic:pixelsize=12
+!URxvt*boldItalicFont: xft:Anonymous Pro:Bold:Italic:pixelsize=12
 
 !!-- DejaVu Sans Mono Font
 !URxvt*font: xft:DejaVu Sans Mono for Powerline:Regular:size=6.5
 !URxvt*boldFont: xft:DejaVu Sans Mono:bold:size=6.5
 !URxvt*italicFont: xft:DejaVu Sans Mono for Powerline:italic:size=6.5
 !URxvt*boldItalicFont: xft:DejaVu Sans Mono for Powerline:bold:italic:size=6.5
-
-!!-- Liberation Mono Font
-!URxvt*font: xft:Liberation Mono for Powerline:pixelsize=10
 
 
 URxvt*intensityStyles: false

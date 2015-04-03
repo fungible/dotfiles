@@ -93,6 +93,9 @@ map <F10> :echo "hi<" .
          \ "> lo<" .
          \ synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .
          \ ">"<CR>
+
+" map \ and | to forward/backwards line search
+" map , to |(column goto)
 nnoremap \| ,
 nnoremap , \|
 nnoremap \ ;
@@ -114,6 +117,13 @@ nmap <leader>qw i"<Esc>Ea",<Esc>W
 nmap <leader>nt :NERDTreeToggle<CR>
 " toggle MiniBufExpl
 nmap <leader>mb :MBEToggle<CR>
+" toggle relative line numbers
+nmap <leader>n :set rnu!<CR>
+" strip trailing whitespace
+nmap <leader>sw :call StripTrailWS()<CR>
+" Buffer forward/backward
+nmap <leader>bb :bn<CR>
+nmap <leader>BB :bp<CR>
 
 
 runtime! ftplugin/man.vim	"use in-window man pages
@@ -147,9 +157,9 @@ if &t_Co > 2 || has("gui_running")
     set background=dark
     let g:airline_theme = 'wombat'
   else
-    colorscheme gruvbox
-    set background=light
-    let g:airline_theme = 'gruvbox'
+    colorscheme solarized
+    set background=dark
+    let g:airline_theme = 'wombat'
   endif
   set hlsearch
   set colorcolumn=80
