@@ -78,7 +78,7 @@ alias pacorphans='pacman -Qdt'		# List orphaned packages
 alias pactoplvl='pacman -Qt'		# List top-level packages
 alias paclf='pacman -Ql'		# List files installed by given package
 alias pacowns='pacman -Qo'		# List packages that own the given file
-alias pacclean='sudo pacman -Sc'	# clean cache of packages not installed
+alias pacclean='paccache -r && paccache -ruk0'	# clean cache of packages not installed
 alias aur='pacaur'                      # pacaur shortcut
 complete -F _pacaur -o default aur      # pacaur completion for aur alias
 

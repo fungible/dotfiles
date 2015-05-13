@@ -16,11 +16,11 @@ set backspace=indent,eol,start
 "  set backup		" keep a backup file
 "endif
 
-set listchars=tab:▶—,trail:•,extends:»,precedes:«
+set listchars=tab:▶-,trail:•,extends:»,precedes:«,eol:◥
 set fillchars=stl:.,stlnc:-,vert:┆,fold:+,diff:―
 set wildmode=list:longest,full
 set sessionoptions+=resize
-set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5
+set guifont=Envy\ Code\ R\ for\ Powerline\ 8
 set guioptions-=T       " no toolbar
 set guioptions-=r       " no right-hand scrollbar
 set guioptions-=L       " no left-hand scrollbar
@@ -94,6 +94,13 @@ map <F10> :echo "hi<" .
          \ synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .
          \ ">"<CR>
 
+map <silent> <F9> :set guifont=Liberation\ Mono\ for\ Powerline\ 7.5 <Bar>
+                  \ set lsp&<CR>
+map <silent> <F11> :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar>
+                  \ set lsp=-1<CR>
+map <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar>
+                  \ set lsp&<CR>
+
 " map \ and | to forward/backwards line search
 " map , to |(column goto)
 nnoremap \| ,
@@ -107,7 +114,7 @@ nmap <silent> <leader><space> :noh<CR>
 " cd to the directory of the current buffer
 nmap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " toggle highlighting tabs and trailing spaces
-nmap <leader>l :set list!<CR>
+nmap <silent> <leader>l :set list!<CR>
 " toggle/reset indent lines for indentlines plugin
 nmap <leader>ii :IndentLinesToggle<CR>
 nmap <leader>ir :IndentLinesReset<CR>
@@ -124,12 +131,12 @@ nmap <leader>sw :call StripTrailWS()<CR>
 " Buffer forward/backward
 nmap <leader>bb :bn<CR>
 nmap <leader>BB :bp<CR>
+" map :write and :quit
+nmap <silent> <leader>w :w<CR>
+map <silent> Q :q<CR>
 
 
 runtime! ftplugin/man.vim	"use in-window man pages
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -153,13 +160,13 @@ if &t_Co > 2 || has("gui_running")
   let perl_string_as_statement = 1
   let solarized_diffmode = "high"
   if has("gui_running")
-    colorscheme solarized
-    set background=dark
-    let g:airline_theme = 'wombat'
+    colorscheme gruvbox
+    set background=light
+    let g:airline_theme = 'bubblegum'
   else
     colorscheme solarized
     set background=dark
-    let g:airline_theme = 'wombat'
+    let g:airline_theme = 'base16'
   endif
   set hlsearch
   set colorcolumn=80

@@ -72,7 +72,7 @@ panel_date() {
 }
 
 panel_gputemp() {
-   echo -e "gpu\t^fg(#586e75)GPUtemp:^fg(#eee8d5)$(nvidia-settings -tq 'gpucoretemp')C"
+   echo -e "gpu\t^fg(#586e75)GPUtemp:^fg(#eee8d5)$(nvidia-smi | sed -n '9p' | awk '{ print $3 }')"
 }
 
 frame_gap=$(hc get frame_gap)

@@ -30,14 +30,14 @@
 
 ! Light
 
-! define S_base03        #fdf6e3
-! define S_base02        #eee8d5
-! define S_base01        #93a1a1
-! define S_base00        #839496
-! define S_base0         #657b83
-! define S_base1         #586e75
-! define S_base2         #073642
-! define S_base3         #002b36
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
 
 
 ! To only apply colors to your terminal, for example, prefix
@@ -87,13 +87,13 @@ Xft.dpi: 107
 
 !!-- Source Code Pro Font
 !URxvt*font: xft:Source Code Pro for Powerline:Regular:pixelsize=10
-!URxvt*boldFont: xft:Source Code Pro:Semibold:size=7
-!URxvt*italicFont: xft:Source Code Pro:Italic:size=7
-!URxvt*boldItalicFont: xft:Source Code Pro:Bold Italic:size=7
+!URxvt*boldFont: xft:Source Code Pro:Bold:pixelsize=10
+!URxvt*italicFont: xft:Source Code Pro:Italic:pixelsize=10
+!URxvt*boldItalicFont: xft:Source Code Pro:Bold:Italic:pixelsize=10
 
 !!-- ProggySquareSZ Font
-URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16:antialias=0:hinting=0
-URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16:antialias=0:hinting=0
+URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16
+URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16
 URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:Italic:pixelsize=16
 URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=16
 
@@ -115,13 +115,19 @@ URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=1
 !URxvt*italicFont: xft:DejaVu Sans Mono for Powerline:italic:size=6.5
 !URxvt*boldItalicFont: xft:DejaVu Sans Mono for Powerline:bold:italic:size=6.5
 
+!!-- Envy Code R
+!URxvt*font: xft:Envy Code R for Powerline:pixelsize=12
+!URxvt*boldFont: xft:Envy Code R for Powerline:Bold:pixelsize=12
+!URxvt*italicFont: xft:Envy Code R for Powerline:Italic:pixelsize=12
+!URxvt*boldItalicFont: xft:Envy Code R for Powerline:Bold:Italic:pixelsize=12
+
 
 URxvt*intensityStyles: false
 URxvt*borderLess: false
 URxvt*buffered: true
 URxvt*cursorBlink: true
 URxvt*hold: false
-URxvt*letterSpace: -1
+URxvt*letterSpace: 0
 URxvt*mapAlert: true
 URxvt*mouseWheelScrollPage: true
 URxvt*perl-ext-common: default,matcher,selection-to-clipboard,theme-switch

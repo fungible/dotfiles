@@ -830,7 +830,7 @@ let hs_highlight_boolean=1
 " highlight delims, see the plugin referenced above
 let hs_highlight_delimiters=1
 
-exe "hi! cPreCondit". s:fg_orange.s:bg_none   .s:fmt_none
+"exe "hi! cPreCondit". s:fg_orange.s:bg_none   .s:fmt_none
 
 exe "hi! VarId"    . s:fg_blue   .s:bg_none   .s:fmt_none
 exe "hi! ConId"    . s:fg_yellow .s:bg_none   .s:fmt_none

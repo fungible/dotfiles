@@ -68,12 +68,15 @@ tag_keys=( {1..9} 0 )
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
     hc add "${tag_names[$i]}"
+    hc use "${tag_names[$i]}"
+    hc set_layout 3
     key="${tag_keys[$i]}"
     if ! [ -z "$key" ] ; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Shift-$key" move_index "$i"
     fi
 done
+hc use_index 0
 
 # cycle through tags
 hc keybind Control-Alt-bracketright use_index +1 --skip-visible
@@ -127,6 +130,7 @@ hc set frame_normal_opacity 20
 hc set mouse_recenter_gap 0
 hc set frame_border_normal_color '#969896'
 hc set frame_border_width 0
+hc set default_frame_layout 3
 #hc set frame_bg_normal_color '#565656'
 #hc set frame_bg_active_color '#345F0C'
 #hc set frame_transparent_width 0
@@ -172,6 +176,6 @@ fi
 
 # These apps handle there own selves
 # compton -cCGb &
-hsetroot -full /usr/share/wallpapers/clone.png &
+hsetroot -full /usr/share/wallpapers/clone.png
 # redshift -l 37.39:-121.86 -t 6500:2400 &
 # volumeicon &

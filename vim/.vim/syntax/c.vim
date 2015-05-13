@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	C
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last Change:	2014 Nov 13
+" Last Change:	2015 Mar 05
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -14,11 +14,10 @@ set cpo&vim
 let s:ft = matchstr(&ft, '^\([^.]\)\+')
 
 " match highlight symbol characters and operators
-syn match      cOperator      "[*/%^]=\?"
-syn match      cOperator      "\([&|+-]\)\(\1\|=\)\?"
-syn match      cOperator      "\([<>]\)\1\?=\?"
-syn match      cOperator      "[!=]=\?"
-syn match      cOperator      "[.~?:]\="
+syn match      cOperator      display "[.~]"
+syn match      cOperator      display "[=!*/^%]=\?"
+syn match      cOperator      display "\([&|+-]\)\(\1\|=\)\?"
+syn match      cOperator      display "\([<>]\)\1\?=\?"
 
 " A bunch of useful C keywords
 syn keyword	cStatement	goto break return continue asm
@@ -54,16 +53,17 @@ if !exists("c_no_cformat")
 endif
 
 " cCppString: same as cString, but ends at end of line
-if s:ft ==# "cpp" && !exists("cpp_no_cpp11")
+if s:ft ==# "cpp" && !exists("cpp_no_cpp11") && !exists("c_no_cformat")
   " ISO C++11
   syn region	cString		start=+\(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   syn region 	cCppString	start=+\(L\|u\|u8\|U\|R\|LR\|u8R\|uR\|UR\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
-elseif s:ft ==# "c" && !exists("c_no_c11")
+elseif s:ft ==# "c" && !exists("c_no_c11") && !exists("c_no_cformat")
   " ISO C99
   syn region	cString		start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   syn region	cCppString	start=+\%(L\|U\|u8\)\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
 else
   " older C or C++
+  syn match	cFormat		display "%%" contained
   syn region	cString		start=+L\="+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
   syn region	cCppString	start=+L\="+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end='$' contains=cSpecial,cFormat,@Spell
 endif
@@ -87,7 +87,11 @@ syn match	cSpecialCharacter display "L'\\x\x\+'"
 
 if (s:ft ==# "c" && !exists("c_no_c11")) || (s:ft ==# "cpp" && !exists("cpp_no_cpp11"))
   " ISO C11 or ISO C++ 11
-  syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
+  if exists("c_no_cformat")
+    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,@Spell extend
+  else
+    syn region	cString		start=+\%(U\|u8\=\)"+ skip=+\\\\\|\\"+ end=+"+ contains=cSpecial,cFormat,@Spell extend
+  endif
   syn match	cCharacter	"[Uu]'[^\\]'"
   syn match	cCharacter	"[Uu]'[^']*'" contains=cSpecial
   if exists("c_gnu")
@@ -337,6 +341,8 @@ if !exists("c_no_ansi") || exists("c_ansi_constants") || exists("c_gnu")
   " POSIX 2001
   syn keyword cConstant SIGBUS SIGPOLL SIGPROF SIGSYS SIGURG
   syn keyword cConstant SIGVTALRM SIGXCPU SIGXFSZ
+  " non-POSIX signals
+  syn keyword cConstant SIGWINCH SIGINFO
   " Add POSIX errors as well
   syn keyword cConstant E2BIG EACCES EAGAIN EBADF EBADMSG EBUSY
   syn keyword cConstant ECANCELED ECHILD EDEADLK EDOM EEXIST EFAULT
@@ -388,14 +394,19 @@ syn region	cPreProc	start="^\s*\(%:\|#\)\s*\(pragma\>\|line\>\|warning\>\|warn\>
 " Highlight User Labels
 syn cluster	cMultiGroup	contains=cIncluded,cSpecial,cCommentSkip,cCommentString,cComment2String,@cCommentGroup,cCommentStartError,cUserCont,cUserLabel,cBitField,cOctalZero,cCppOutWrapper,cCppInWrapper,@cCppOutInGroup,cFormat,cNumber,cFloat,cOctal,cOctalError,cNumbersCom,cCppParen,cCppBracket,cCppString
 if s:ft ==# 'c' || exists("cpp_no_cpp11")
-  syn region	cMulti		transparent start='?' skip='::' end=':' contains=ALLBUT,@cMultiGroup,@Spell,@cStringGroup
+  syn region	cMulti		transparent matchgroup=cOperator start='?' skip='::' end=':' contains=ALLBUT,@cMultiGroup,@Spell,@cStringGroup
 endif
 " Avoid matching foo::bar() in C++ by requiring that the next char is not ':'
 syn cluster	cLabelGroup	contains=cUserLabel
 syn match	cUserCont	display "^\s*\I\i*\s*:$" contains=@cLabelGroup
 syn match	cUserCont	display ";\s*\I\i*\s*:$" contains=@cLabelGroup
-syn match	cUserCont	display "^\s*\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
-syn match	cUserCont	display ";\s*\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+if s:ft ==# 'cpp'
+  syn match	cUserCont	display "^\s*\%(class\|struct\|enum\)\@!\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+  syn match	cUserCont	display ";\s*\%(class\|struct\|enum\)\@!\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+else
+  syn match	cUserCont	display "^\s*\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+  syn match	cUserCont	display ";\s*\I\i*\s*:[^:]"me=e-1 contains=@cLabelGroup
+endif
 
 syn match	cUserLabel	display "\I\i*" contained
 
