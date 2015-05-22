@@ -15,7 +15,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 HISTCONTROL=ignoredups:ereasedups
 HISTSIZE=2500
 HISTFILESIZE=10000
-export PROMPT_COMMAND="history -a;history -n;${PROMPT_COMMAND:+$PROMPT_COMMAND}"
+export PROMPT_COMMAND="history -a;history -n;"
 
 # IF NOT RUNNING INTERACTIVELY, THEN RETURN, EVERYTHING BELOW APPLIES TO
 # AN INTERACTIVE SHELL
@@ -44,11 +44,6 @@ shopt -s extglob	# extended globs allows for regex globbing
 shopt -s shift_verbose	# may be helpful when using shift builtin
 shopt -s checkjobs	# warn about running jobs when attempting to exit
 
-
-# TURN ON 256 COLOR SUPPORT FOR XTERM
-if [ "x$TERM" = "xxterm" ]; then
-    export TERM="xterm-256color"
-fi
 
 # < PROMPT SETUP >
 # set a fancy prompt (non-color, unless we know we "want" color)
@@ -82,10 +77,19 @@ if [ "$color_prompt" = yes ]; then
        colorfg[$i]=$(tput setaf $i)
        colorbg[$i]=$(tput setab $i)
     done
-    #PS1="╔═╚═┌─(\$newPWD)─(\$(date \"+%H:%M\"))─┐\n└─(\u@\h \$)─> "
-    #PS1='[\[$REDFG$BOLD\]\u\[$RESET\]|\[$CYANFG$BOLD\]\w\[$RESET\]]\[$REDFG$BOLD\]\$\[$RESET\]:> '
-    PS1='╔═![\[${colorfg[6]}$bold\]\w\[$reset\]]%\n╚═[\[${colorfg[1]}$bold\]\u\[$reset\]]\[${colorfg[1]}$bold\]\$\[$reset\]:> '
-    PS2='[\[${colorfg[3]}$bold\]...\[$reset\]:> '
+
+    am_i_root() {
+       char='»'
+       if [ "$UID" = "0" ]; then
+          echo -ne "\[${colorfg[1]}\]$char\[$reset\]"
+       else
+          echo -ne "$char"
+       fi
+    }
+
+    #╔═╚═┌─┐└─ line drawing stuff
+    PS1="┌─![\[${colorfg[6]}$bold\]\w\[$reset\]]%\n└╼━ $(am_i_root) "
+    PS2='\[${colorfg[3]}\]•••\[$reset\] » '
 else
     PS1='<\d|\@> \u [\w]\$ '
     PS2='[...:>'

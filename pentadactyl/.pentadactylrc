@@ -9,24 +9,21 @@ map -count -modes=n,v U -builtin <count>u
 map -count -modes=n,v x -builtin <count>d
 
 " OPTIONS
-set defsearch=startpage-https
+set defsearch=ddg
 set guioptions+=n
 set wildmode=list:longest,full
 set hintmatching=wordstartswith
 set hlfind
 set newtab=extoptions,help
 set passkeys=youtube.com:jkl
-set popups=resized
 set titlestring=Firefox
 set visualbell
 set strictfocus^=google.com:laissez-faire
 
 " USER-COMMANDS
-command -nargs=* ddg open duckduckgo <args>
-command -nargs=* wiki open wikipedia-en <args>
 
 " HIGHLIGHTS && COLORSCHEMES
-colorscheme solarized-dark
+colorscheme gruvbox-dark
 highlight FontFixed
    \ /* The font used for fixed-width fonts */
    \ font-family: Liberation Mono !important;

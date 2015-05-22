@@ -20,7 +20,7 @@ set listchars=tab:▶-,trail:•,extends:»,precedes:«,eol:◥
 set fillchars=stl:.,stlnc:-,vert:┆,fold:+,diff:―
 set wildmode=list:longest,full
 set sessionoptions+=resize
-set guifont=Envy\ Code\ R\ for\ Powerline\ 8
+set guifont=Input\ 8
 set guioptions-=T       " no toolbar
 set guioptions-=r       " no right-hand scrollbar
 set guioptions-=L       " no left-hand scrollbar
@@ -63,6 +63,10 @@ let g:indentLine_char = '┆'
 let g:indentLine_enabled = 0
 
 " airline plugin options
+let g:loaded_airline = 0   " mask airline
+" Test out lightline
+" set runtimepath+=~/git-repos/vim-lightline-git
+" let g:lightline = { 'colorscheme' : 'solarized' }
 let g:airline_powerline_fonts = 1
 let g:airline_theme_patch_func = 'AirlineThemePatch'  " see AirlineThemePatch below
 set laststatus=2                  " Show status line always
@@ -94,18 +98,30 @@ map <F10> :echo "hi<" .
          \ synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .
          \ ">"<CR>
 
-map <silent> <F9> :set guifont=Liberation\ Mono\ for\ Powerline\ 7.5 <Bar>
-                  \ set lsp&<CR>
-map <silent> <F11> :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar>
+map <silent> <F9> :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar>
                   \ set lsp=-1<CR>
+map <silent> <F11> :set guifont=Input\ 8<Bar>
+                  \ set lsp&<CR>
 map <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar>
                   \ set lsp&<CR>
+
 
 " map \ and | to forward/backwards line search
 " map , to |(column goto)
 nnoremap \| ,
 nnoremap , \|
 nnoremap \ ;
+" map window movement <C-W>{h,j,k,l}
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+" Buffer forward/backward
+nmap <silent> <Tab> :bnext<CR>
+nmap <silent <S-Tab> :bprevious<CR>
+" <Tab> == <C-I> so remap it
+nnoremap <C-_> <C-O>
+nnoremap <C-O> <C-I>
 
 " mapleader maps to ';' instead of default '\'
 let g:mapleader = ';'
@@ -121,19 +137,18 @@ nmap <leader>ir :IndentLinesReset<CR>
 " quote words like perl's qw//
 nmap <leader>qw i"<Esc>Ea",<Esc>W
 " toggle NERDTree
-nmap <leader>nt :NERDTreeToggle<CR>
+"nmap <leader>nt :NERDTreeToggle<CR>
 " toggle MiniBufExpl
 nmap <leader>mb :MBEToggle<CR>
 " toggle relative line numbers
 nmap <leader>n :set rnu!<CR>
 " strip trailing whitespace
 nmap <leader>sw :call StripTrailWS()<CR>
-" Buffer forward/backward
-nmap <leader>bb :bn<CR>
-nmap <leader>BB :bp<CR>
 " map :write and :quit
 nmap <silent> <leader>w :w<CR>
-map <silent> Q :q<CR>
+nmap <silent> Q :q<CR>
+nmap <silent> AQ :qa<CR>
+nmap <silent> AA :x<CR>
 
 
 runtime! ftplugin/man.vim	"use in-window man pages

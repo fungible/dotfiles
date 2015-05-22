@@ -79,6 +79,8 @@ done
 hc use_index 0
 
 # cycle through tags
+hc keybind Control-Alt-l use_index +1 --skip-visible
+hc keybind Control-Alt-h  use_index -1 --skip-visible
 hc keybind Control-Alt-bracketright use_index +1 --skip-visible
 hc keybind Control-Alt-bracketleft  use_index -1 --skip-visible
 

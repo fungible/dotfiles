@@ -47,7 +47,7 @@
 
 !URxvt*.depth:                   32
 *background:              S_base03
-*foreground:              S_base0
+*foreground:              S_base1
 *fading:                  20
 *fadeColor:               #000000
 *cursorColor:             S_base1
@@ -87,15 +87,30 @@ Xft.dpi: 107
 
 !!-- Source Code Pro Font
 !URxvt*font: xft:Source Code Pro for Powerline:Regular:pixelsize=10
-!URxvt*boldFont: xft:Source Code Pro:Bold:pixelsize=10
+!URxvt*boldFont: xft:Source Code Pro:Semibold:pixelsize=10
 !URxvt*italicFont: xft:Source Code Pro:Italic:pixelsize=10
-!URxvt*boldItalicFont: xft:Source Code Pro:Bold:Italic:pixelsize=10
+!URxvt*boldItalicFont: xft:Source Code Pro:SemiBold:Italic:pixelsize=10
 
-!!-- ProggySquareSZ Font
-URxvt*font: xft:ProggySquareTTSZ for Powerline:pixelsize=16
-URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16
-URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:Italic:pixelsize=16
-URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=16
+!!-- ProggySquareSZ Font w/ bdf-unifont fallback
+!URxvt*lineSpace: 1
+!URxvt*font: xft:ProggySquareTTSZ for Powerline:Regular:pixelsize=16, \
+!URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16, \
+!URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:pixelsize=16, \
+!URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16, \
+
+!!-- Tamzen Font w/ unicode fallback
+URxvt*font: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
+            xft:Anonymous Pro:Regular:pixelsize=13, \
+            -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+URxvt*boldFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
+                xft:Anonymous Pro:Regular:pixelsize=13, \
+                -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
+URxvt*italicFont: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
+                  xft:Anonymous Pro:Regular:pixelsize=13, \
+                  -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
+URxvt*boldItalicFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
+                      xft:Anonymous Pro:Regular:pixelsize=13, \
+                      -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
 
 !!-- Meslo LG S font
 !URxvt*font: xft:Meslo LG S for Powerline:pixelsize=10
@@ -103,24 +118,17 @@ URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:Italic:pixelsize=1
 !URxvt*italicFont: xft:Meslo LG S for Powerline:Italic:pixelsize=10
 !URxvt*boldItalicFont: xft:Meslo LG S for Powerline:Bold Italic:pixelsize=10
 
-!!-- Anonymous Pro Font #no powerline patch
-!URxvt*font: xft:Anonymous Pro:Regular:pixelsize=12
-!URxvt*boldFont: xft:Anonymous Pro:Bold:pixelsize=12
-!URxvt*italicFont: xft:Anonymous Pro:Italic:pixelsize=12
-!URxvt*boldItalicFont: xft:Anonymous Pro:Bold:Italic:pixelsize=12
+!!-- Anonymous Pro Font no powerline
+!URxvt*font: xft:Anonymous Pro:Regular:pixelsize=11
+!URxvt*boldFont: xft:Anonymous Pro:Bold:pixelsize=11
+!URxvt*italicFont: xft:Anonymous Pro:Italic:pixelsize=11
+!URxvt*boldItalicFont: xft:Anonymous Pro:Bold:Italic:pixelsize=11
 
-!!-- DejaVu Sans Mono Font
-!URxvt*font: xft:DejaVu Sans Mono for Powerline:Regular:size=6.5
-!URxvt*boldFont: xft:DejaVu Sans Mono:bold:size=6.5
-!URxvt*italicFont: xft:DejaVu Sans Mono for Powerline:italic:size=6.5
-!URxvt*boldItalicFont: xft:DejaVu Sans Mono for Powerline:bold:italic:size=6.5
-
-!!-- Envy Code R
-!URxvt*font: xft:Envy Code R for Powerline:pixelsize=12
-!URxvt*boldFont: xft:Envy Code R for Powerline:Bold:pixelsize=12
-!URxvt*italicFont: xft:Envy Code R for Powerline:Italic:pixelsize=12
-!URxvt*boldItalicFont: xft:Envy Code R for Powerline:Bold:Italic:pixelsize=12
-
+!!-- Monaco Font no powerline
+!URxvt*font: xft:Monaco:Regular:pixelsize=10
+!URxvt*boldFont: xft:Monaco:Bold:pixelsize=10
+!URxvt*italicFont: xft:Monaco:Italic:pixelsize=10
+!URxvt*boldItalicFont: xft:Monaco:Bold:Italic:pixelsize=10
 
 URxvt*intensityStyles: false
 URxvt*borderLess: false
