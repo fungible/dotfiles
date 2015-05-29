@@ -104,13 +104,13 @@ URxvt*font: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
             -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
 URxvt*boldFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
                 xft:Anonymous Pro:Regular:pixelsize=13, \
-                -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
+                -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
 URxvt*italicFont: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
                   xft:Anonymous Pro:Regular:pixelsize=13, \
-                  -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
+                  -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
 URxvt*boldItalicFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
                       xft:Anonymous Pro:Regular:pixelsize=13, \
-                      -*-Unifont-*-*-*-*-*-*-100-100-*-*-*-1
+                      -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
 
 !!-- Meslo LG S font
 !URxvt*font: xft:Meslo LG S for Powerline:pixelsize=10
@@ -138,7 +138,7 @@ URxvt*hold: false
 URxvt*letterSpace: 0
 URxvt*mapAlert: true
 URxvt*mouseWheelScrollPage: true
-URxvt*perl-ext-common: default,matcher,selection-to-clipboard,theme-switch
+URxvt*perl-ext-common: default,matcher,selection-to-clipboard
 URxvt*perl-ext:
 URxvt*print-pipe: cat > $HOME/$(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
 URxvt*saveLines: 0
@@ -156,11 +156,3 @@ URxvt*visualBell: false
 URxvt*iso14755: false
 URxvt*iso14755_52: false
 URxvt*url-launcher: /usr/bin/firefox
-
-!! Settings for theme-switch script
-!URxvt.theme-switch.themedir: ~/.urxvt/themes
-!URxvt.keysym.F3: perl:theme-switch:prev
-!URxvt.keysym.F4: perl:theme-switch:next
-!URxvt.theme-switch.state-file: ~/.urxvt/.theme.state
-!URxvt.keysym.F5: perl:theme-switch:save-state
-!URxvt.keysym.F6: perl:theme-switch:load-state
