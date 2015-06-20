@@ -178,6 +178,7 @@ fi
 
 # These apps handle there own selves
 # compton -cCGb &
-hsetroot -full /usr/share/wallpapers/binary_rain.png
+#feh --no-fehbg --bg-max /usr/share/wallpapers/binary_rain.png
+feh --no-fehbg --bg-scale /usr/share/wallpapers/diamonds_bright.jpg
 # redshift -l 37.39:-121.86 -t 6500:2400 &
 # volumeicon &
