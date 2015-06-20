@@ -55,7 +55,7 @@ set softtabstop=3       " insert 3 spaces for a tab
 set autoread            " automatically read a file when it was modified outside of VIM
 set wildmenu            " show command-line completion menu
 set modelines=1         " set modlines to 1 line instead of 5 (default)
-set hidden              " abandoned (modified but not saved) buffers are hidden
+set hidden              " abandoned (modified but not saved) buffers are not unloaded
 set scrolloff=5         " set scroll off context lines
 set linebreak           " wrap lines on 'breakat' characters
 set showbreak=└         " character to prepend on wrapped lines
@@ -64,7 +64,11 @@ set notimeout           " Don't let unfinished mappings timeout
 set ttimeout            " Let term keycodes timeout
 set ttimeoutlen=50      " Set term keycode timeout low since we have a fast terminal
 set nrformats-=octal    " Treat octals (leading 0) as decimals when <C-A> and <C-X>
+set matchpairs+=<:>     " Add angle brackets to pair matching operator (%)
+set matchtime=2         " shorten matchpair highlight time (default: 5)
 set laststatus=2        " Show status line always
+" Super basic/not fancy statusline
+set statusline=\ %(%h%w%q%)\ \<\ %f\ \>\ %(%m\ %r%)%<%=%vc\ %LL\ %y
 
 let g:mapleader = ';'   " mapleader maps to ';' instead of default '\'
 
@@ -73,14 +77,29 @@ let g:mapleader = ';'   " mapleader maps to ';' instead of default '\'
 " IndentLine plugin options
 let g:indentLine_enabled = 0
 let g:indentLine_char = '┆'
+" toggle/reset indent lines for indentlines plugin
+nmap <leader>ii :IndentLinesToggle<CR>
+nmap <leader>ir :IndentLinesReset<CR>
 
 " Airline plugin options
-" let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
+ let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
 let g:loaded_airline = 0   " mask airline
 let g:airline_symbols = {}
-let g:airline_symbols.modified = '*'
 let g:airline_symbols.whitespace = '‼'
 let g:airline_powerline_fonts = 1
+
+call airline#parts#define_raw('file', '%f')
+call airline#parts#define('modified', {
+    \ 'condition' : '&modified',
+    \ 'text' : '(*)',
+    \ 'accent' : 'red'
+    \ })
+call airline#parts#define('modifiable', {
+    \ 'condition' : '!&modifiable',
+    \ 'text' : '(■)',
+    \ 'accent' : 'red'
+    \ })
+let g:airline_section_c = airline#section#create(['%<', 'file', 'modified', 'modifiable', ' ', 'readonly'])
 
 " Load/enable airline extensions selectively
 let g:airline_extensions = [
@@ -104,13 +123,24 @@ let g:loaded_nerd_tree = 1          " mask NERDTree
 
 
 "" LOCAL PLUGINS
-" set runtimepath+=~/git-repos/vim-lightline-git'
+" set rtp+=~/git-repos/vim-lightline-git'
 " let g:lightline = { 'colorscheme' : 'solarized' }
 
-set runtimepath+=~/git-repos/vim-SkyBison
-noremap <silent> <leader>: :<C-U>call SkyBison("")<CR>
+set rtp+=~/git-repos/vim-SkyBison
+nnoremap <silent> <leader>: :<C-U>call SkyBison("")<CR>
+nmap <leader>b 2:<C-U>call SkyBison("b ")<CR>
+nmap <leader>sb 2:<C-U>call SkyBison("sb ")<CR>
+nmap <leader>vb 2:<C-U>call SkyBison("vert sb ")<CR>
 
-set runtimepath+=~/git-repos/vim-sayonara
+set rtp+=~/git-repos/vim-sayonara
+nmap <silent> QQ :Sayonara<CR>
+
+set rtp+=~/git-repos/vim-commentary
+set rtp+=~/git-repos/vim-eunuch
+set rtp+=~/git-repos/vim-tbone
+set rtp+=~/git-repos/vim-unimpaired
+"set rtp+=~/git-repos/vim-vinegar
+set rtp+=~/git-repos/vim-vimux
 
 runtime! ftplugin/man.vim     " use in-window man pages
 
@@ -168,19 +198,13 @@ nmap <silent> <leader><space> :noh<CR>
 
 " cd to the directory of the current buffer
 nmap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nmap <leader>p :pwd<CR>
 
 " toggle highlighting tabs and trailing spaces
 nmap <silent> <leader>l :set list!<CR>
 
-" toggle/reset indent lines for indentlines plugin
-nmap <leader>ii :IndentLinesToggle<CR>
-nmap <leader>ir :IndentLinesReset<CR>
-
 " quote words like perl's qw//
 nmap <leader>qw i"<Esc>Ea",<Esc>W
-
-" toggle NERDTree
-"nmap <leader>nt :NERDTreeToggle<CR>
 
 " toggle relative line numbers
 nmap <leader>n :set rnu!<CR>
@@ -190,7 +214,6 @@ nmap <leader>sw :call StripTrailWS()<CR>
 
 " map :write and :quit
 nmap <silent> <leader>w :w<CR>
-nmap <silent> QQ :Sayonara<CR>
 nmap <silent> QA :qa<CR>
 nmap <silent> QW :xa<CR>
 
@@ -223,7 +246,7 @@ if &t_Co > 2 || has("gui_running")
     else
         colorscheme solarized
         set background=dark
-        let g:airline_theme = 'base16'
+        let g:airline_theme = 'solarized'
     endif
 endif
 
@@ -292,6 +315,22 @@ endfunc
 
 " Airline theme patch function
 func! AirlineThemePatch(palette)
+    " index 2 is ctermfg, index 3 is ctermbg
+    if g:airline_theme == 'base16'
+        " this works for solarized coloring, maybe not others
+        for section in keys(a:palette.inactive)
+            if section =~# 'airline_\%(a\|b\|c\)'
+                " reverse
+                let a:palette.inactive[section][2] = 8
+                let a:palette.inactive[section][3] = 11
+            endif
+        endfor
+        for section in keys(a:palette.inactive_modified)
+            if section =~# 'airline_\%(a\|b\|c\)'
+                let a:palette.inactive_modified[section][2] = 3
+            endif
+        endfor
+    endif
     if g:airline_theme == 'wombat'
         for colors in values(a:palette.inactive)
             let colors[2] = 16

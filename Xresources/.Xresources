@@ -83,7 +83,7 @@
 !URxvt*underlineColor: yellow
 
 !!-- Override infinality dpi of 96 with native dpi of 107
-Xft.dpi: 107
+Xft.dpi: 105.83
 
 !!-- Source Code Pro Font
 !URxvt*font: xft:Source Code Pro for Powerline:Regular:pixelsize=10

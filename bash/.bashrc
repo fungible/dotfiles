@@ -27,7 +27,7 @@ export PROMPT_COMMAND="history -a;history -n;"
 # SHELL OPTIONS MAY TAKE ARGUMENTS
 # FOR REFERENCE SEE LINK BELOW
 # [http://www.gnu.org/software/bash/manual/bashref.html#The-Set-Builtin]
-set -o vi		# vi command line editing mode / readline mode
+#set -o vi		# vi command line editing mode / readline mode
 set -o ignoreeof	# prevent CTRL-D from closing shell
 set -m			# turn on job control
 
