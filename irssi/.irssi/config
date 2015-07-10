@@ -1,31 +1,44 @@
 servers = (
-  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
-  { 
-    address = "irc.undernet.org";
-    chatnet = "Undernet";
-    port = "6667";
-  },
   { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  { 
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
+  { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
     port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
   },
-  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
   {
     address = "irc.gamesurge.net";
     chatnet = "GameSurge";
     port = "6667";
   },
+  { address = "eu.irc6.net"; chatnet = "IRCnet"; port = "6667"; },
+  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
+  { address = "irc.oftc.net"; chatnet = "OFTC"; port = "6667"; },
+  { 
+    address = "irc.quakenet.org";
+    chatnet = "QuakeNet";
+    port = "6667";
+  },
   { address = "irc.webchat.org"; chatnet = "WebChat"; port = "6667"; },
   { address = "irc.rizon.net"; chatnet = "Rizon"; port = "6667"; },
   { address = "irc.link-net.org"; chatnet = "LinkNet"; port = "6667"; },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; }
+  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
+  { 
+    address = "irc.undernet.org";
+    chatnet = "Undernet";
+    port = "6667";
+  }
 );
 
 chatnets = {
+  DALnet = {
+    type = "IRC";
+    max_kicks = "4";
+    max_msgs = "3";
+    max_whois = "30";
+  };
   IRCnet = {
     type = "IRC";
     max_kicks = "4";
@@ -39,15 +52,10 @@ chatnets = {
     max_msgs = "3";
     max_whois = "1";
   };
+  Freenode = { type = "IRC"; };
   Undernet = {
     type = "IRC";
     max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
     max_msgs = "3";
     max_whois = "30";
   };
@@ -90,9 +98,8 @@ chatnets = {
   SILC = { type = "SILC"; };
 };
 
-channels = (
-  { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
-  { name = "silc"; chatnet = "silc"; autojoin = "No"; }
+channels = ( 
+  { name = "#mnfh"; chatnet = "Freenode"; autojoin = "Yes"; }
 );
 
 aliases = {
@@ -267,21 +274,29 @@ settings = {
   core = {
     timestamp_format = "%I:%M";
     real_name = "Unknown";
-    user_name = "evfung";
+    user_name = "fungible";
     nick = "fungle";
+    use_proxy = "no";
+    proxy_address = "192.92.3.235";
+    proxy_port = "41906";
+    proxy_string = "CONNECT %s:%d HTTP/1.0\012\012";
+    proxy_string_after = "";
+    proxy_password = "";
+    hostname = "pandaemonium";
   };
   "fe-common/core" = {
     theme = "solarized-powerline";
     hilight_color = "%R";
+    completion_auto = "no";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = {
     ### For Solarized adv_windowlist.pl script
-    #awl_display_key_active = "%K%4$N  $C%8%8%N";
-    #awl_display_nokey_active = "%W%4$N  $C%8%8%N";
-    #awl_display_key = "%w%0$N  $C%N";
-    #awl_display_nokey = "%w%0$N  $C%N";
-    #awl_separator = "\\ ";
+    awl_display_key_active = "%K%4$N  $C%8%8%N";
+    awl_display_nokey_active = "%W%4$N  $C%8%8%N";
+    awl_display_key = "%w%0$N  $C%N";
+    awl_display_nokey = "%w%0$N  $C%N";
+    awl_separator = "\\ ";
     awl_block = "20";
     awl_hide_empty = "yes";
     awl_mouse = "yes";
@@ -292,6 +307,7 @@ settings = {
     trackbar_style = "%B";
     title_screen_window = "yes";
     awl_shared_sbar = "OFF";
+    smartfilter_delay = "600";
   };
 };
 hilights = ( { text = "fungle"; nick = "yes"; word = "yes"; } );

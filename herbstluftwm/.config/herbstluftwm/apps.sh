@@ -8,7 +8,7 @@
    volumeicon &
    childpids+=( $! )
 
-   redshift -l 37.39:-121.86 -t 6500:2400 &
+   redshift -l 37.39:-121.86 -t 6500:2200 &
    childpids+=( $! )
 
    herbstclient -w 'reload'

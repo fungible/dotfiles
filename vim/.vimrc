@@ -241,7 +241,7 @@ if &t_Co > 2 || has("gui_running")
 
     if has("gui_running")
         colorscheme gruvbox
-        set background=light
+        set background=dark
         let g:airline_theme = 'bubblegum'
     else
         colorscheme solarized

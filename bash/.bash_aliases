@@ -87,7 +87,7 @@ alias sysd='systemctl'
 complete -F _systemctl sysd
 
 # XRDB
-alias redb='xrdb -load ~/.Xresources && xrdb -merge ~/.Xcolors'
+alias redb='xrdb -merge ~/.Xresources'
 
 # HERBSTCLIENT
 alias hc='herbstclient'
