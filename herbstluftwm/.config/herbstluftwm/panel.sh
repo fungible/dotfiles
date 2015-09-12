@@ -13,7 +13,7 @@ x=${geometry[0]}
 y=${geometry[1]}
 panel_width=${geometry[2]}
 panel_height=18
-font="-*-fixed-medium-*-*-*-15-*-*-*-*-*-*-*"
+font="-*-fixed-medium-*-*-*-10-*-*-*-*-*-*-*"
 bgcolor='#073642' #$(hc get frame_border_normal_color)
 selbg='#b58900'  #$(hc get window_border_active_color)
 selfg='#073642'
@@ -151,10 +151,8 @@ hc pad $monitor $((panel_height-frame_gap+3))
         right="$separator^bg() $gputemp $separator $volume $separator $date $separator"
         right_text_only=$(echo -n "$right" | sed 's.\^[^(]*([^)]*)..g')
         # get width of right aligned text.. and add some space..
-        # HACKY OFFSET GOING ON AFTER UPDATE OF FONTCONFIG PACKAGE, TODO: check
-        offset=130
         width=$($textwidth "$font" "$right_text_only")
-        echo -n "^pa($(($panel_width - $width + $offset)))$right"
+        echo -n "^pa($(($panel_width - $width)))$right"
         echo
 
         ### Data handling ###

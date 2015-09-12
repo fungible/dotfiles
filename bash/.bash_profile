@@ -6,8 +6,6 @@
 # Set my own umask to be more restrictive than default
 umask 066
 
-# SOURCE LOCAL BASH CONFIG
-if test "$PS1" && test "$BASH" && test -r ~/.bashrc; then
-    source ~/.bashrc
-fi
+# Source ~/.bashrc only if interactive shell
+[[ $- == *i* ]] && [[ -r ~/.bashrc ]] && source ~/.bashrc
 

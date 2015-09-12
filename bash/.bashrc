@@ -17,11 +17,6 @@ HISTSIZE=2500
 HISTFILESIZE=10000
 export PROMPT_COMMAND="history -a;history -n;"
 
-# IF NOT RUNNING INTERACTIVELY, THEN RETURN, EVERYTHING BELOW APPLIES TO
-# AN INTERACTIVE SHELL
-[[ $- != *i* ]] && return
-[ ! "$UID" = "0" ] && archbey2
-
 
 # < SHELL OPTIONS >
 # SHELL OPTIONS MAY TAKE ARGUMENTS
@@ -112,3 +107,5 @@ fi
 if [ -r /usr/share/doc/pkgfile/command-not-found.bash ]; then
    source /usr/share/doc/pkgfile/command-not-found.bash
 fi
+
+[ ! "$UID" = "0" ] && archbey2

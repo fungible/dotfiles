@@ -26,9 +26,9 @@ URxvt.color223:  #ebdbb2
 URxvt.color228:  #f2e5bc
 
 ! Light
-URxvt.color229:  #fbf1c7
+!URxvt.color229:  #fbf1c7
 ! Dark
-!URxvt.olor229:  #fdf4c1
+URxvt.color229:  #fdf4c1
 
 URxvt.color230:  #f9f5d7
 URxvt.color234:  #1d2021

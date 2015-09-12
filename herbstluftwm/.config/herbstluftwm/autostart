@@ -19,8 +19,8 @@ Mod=Mod4   # Use the super key as the main modifier
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-w close
-hc keybind $Mod-Return spawn urxvt -e tmux
-hc keybind $Mod-space spawn $HOME/.config/dmenu/dmenu-bind.sh
+hc keybind $Mod-Return  spawn urxvt -e tmux
+hc keybind $Mod-space   spawn $HOME/.config/dmenu/dmenu-bind.sh
 
 # basic movement
 # focusing clients
@@ -52,13 +52,13 @@ hc keybind $Mod-Control-space split explode
 
 # resizing frames
 resizestep=0.05
-hc keybind $Mod-Control-h       resize left +$resizestep
-hc keybind $Mod-Control-j       resize down +$resizestep
-hc keybind $Mod-Control-k       resize up +$resizestep
+hc keybind $Mod-Control-h       resize left  +$resizestep
+hc keybind $Mod-Control-j       resize down  +$resizestep
+hc keybind $Mod-Control-k       resize up    +$resizestep
 hc keybind $Mod-Control-l       resize right +$resizestep
-hc keybind $Mod-Control-Left    resize left +$resizestep
-hc keybind $Mod-Control-Down    resize down +$resizestep
-hc keybind $Mod-Control-Up      resize up +$resizestep
+hc keybind $Mod-Control-Left    resize left  +$resizestep
+hc keybind $Mod-Control-Down    resize down  +$resizestep
+hc keybind $Mod-Control-Up      resize up    +$resizestep
 hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # tags
@@ -176,9 +176,5 @@ if [ -x "$apps" ]; then
    "$apps" &
 fi
 
-# These apps handle there own selves
-# compton -cCGb &
-#feh --no-fehbg --bg-max /usr/share/wallpapers/binary_rain.png
+# Setup wallpaper
 feh --no-fehbg --bg-scale /usr/share/wallpapers/diamonds_bright.jpg
-# redshift -l 37.39:-121.86 -t 6500:2400 &
-# volumeicon &

@@ -78,8 +78,8 @@ let g:mapleader = ';'   " mapleader maps to ';' instead of default '\'
 let g:indentLine_enabled = 0
 let g:indentLine_char = '┆'
 " toggle/reset indent lines for indentlines plugin
-nmap <leader>ii :IndentLinesToggle<CR>
-nmap <leader>ir :IndentLinesReset<CR>
+nnoremap <leader>ii :IndentLinesToggle<CR>
+nnoremap <leader>ir :IndentLinesReset<CR>
 
 " Airline plugin options
  let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
@@ -128,12 +128,12 @@ let g:loaded_nerd_tree = 1          " mask NERDTree
 
 set rtp+=~/git-repos/vim-SkyBison
 nnoremap <silent> <leader>: :<C-U>call SkyBison("")<CR>
-nmap <leader>b 2:<C-U>call SkyBison("b ")<CR>
-nmap <leader>sb 2:<C-U>call SkyBison("sb ")<CR>
-nmap <leader>vb 2:<C-U>call SkyBison("vert sb ")<CR>
+nnoremap <leader>b 2:<C-U>call SkyBison("b ")<CR>
+nnoremap <leader>sb 2:<C-U>call SkyBison("sb ")<CR>
+nnoremap <leader>vb 2:<C-U>call SkyBison("vert sb ")<CR>
 
 set rtp+=~/git-repos/vim-sayonara
-nmap <silent> QQ :Sayonara<CR>
+nnoremap <silent> QQ :Sayonara<CR>
 
 set rtp+=~/git-repos/vim-commentary
 set rtp+=~/git-repos/vim-eunuch
@@ -156,7 +156,7 @@ if has('gui_running')
         endif
     endfunc
 
-    map <A-m> :call ToggleGUIMenuBar()<CR>
+    nnoremap <A-m> :call ToggleGUIMenuBar()<CR>
 endif
 
 " Syntax highlighting debug
@@ -169,15 +169,18 @@ map <F10> :echo "hi<" .
          \ ">"<CR>
 
 " Some GUI fonts
-map <silent> <F9>  :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar> set lsp=-1<CR>
-map <silent> <F11> :set guifont=Input\ 8 <Bar> set lsp&<CR>
-map <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar> set lsp&<CR>
+nnoremap <silent> <F9>  :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar> set lsp=-1<CR>
+nnoremap <silent> <F11> :set guifont=Input\ 8 <Bar> set lsp&<CR>
+nnoremap <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar> set lsp&<CR>
 
 " map \ and | to forward/backwards line search
 " map , to |(column goto)
 nnoremap \| ,
 nnoremap , \|
 nnoremap \ ;
+
+" <CR> to :
+"nnoremap <CR> :
 
 " map window movement <C-W>{h,j,k,l}
 nnoremap <C-H> <C-W>h
@@ -186,36 +189,37 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 
 " Buffer forward/backward
-nmap <silent> <Tab> :bnext<CR>
-nmap <silent> <S-Tab> :bprevious<CR>
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
 
 " <Tab> == <C-I> so remap it
 nnoremap <C-_> <C-O>
 nnoremap <C-O> <C-I>
 
 " ;space = nohighlight
-nmap <silent> <leader><space> :noh<CR>
+nnoremap <silent> <leader><space> :noh<CR>
 
 " cd to the directory of the current buffer
-nmap <leader>cd :cd %:p:h<CR>:pwd<CR>
-nmap <leader>p :pwd<CR>
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>p :pwd<CR>
 
 " toggle highlighting tabs and trailing spaces
-nmap <silent> <leader>l :set list!<CR>
-
-" quote words like perl's qw//
-nmap <leader>qw i"<Esc>Ea",<Esc>W
+nnoremap <silent> <leader>l :set list!<CR>
 
 " toggle relative line numbers
-nmap <leader>n :set rnu!<CR>
+nnoremap <leader>n :set rnu!<CR>
 
 " strip trailing whitespace
-nmap <leader>sw :call StripTrailWS()<CR>
+nnoremap <leader>sw :call StripTrailWS()<CR>
+
+" unbind Q (enter ex mode), its useless
+nnoremap Q <Nop>
 
 " map :write and :quit
-nmap <silent> <leader>w :w<CR>
-nmap <silent> QA :qa<CR>
-nmap <silent> QW :xa<CR>
+nnoremap <silent> <leader>w :w<CR>
+nnoremap <silent> QA :qa<CR>
+nnoremap <silent> QW :xa<CR>
+
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -242,7 +246,7 @@ if &t_Co > 2 || has("gui_running")
     if has("gui_running")
         colorscheme gruvbox
         set background=dark
-        let g:airline_theme = 'bubblegum'
+        let g:airline_theme = 'gruvbox'
     else
         colorscheme solarized
         set background=dark

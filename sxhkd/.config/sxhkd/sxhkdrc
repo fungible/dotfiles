@@ -1,123 +1,149 @@
-#
-# bspwm hotkeys
-#
+# Make sxhkd reload its configuration files:
+super + Escape
+	pkill -SIGUSR1 sxhkd
 
-# Quit bspwM
-super + alt + Escape
+
+###########################
+# BSPWM hotkeys
+###########################
+# Long options because they are more readable
+
+# Quit Command (there's only one)
+##################################
+super + shift + q
 	bspc quit
 
-# Close current window
-super + w
-	bspc window -c
+# Monitor Commands
+###################
+super + shift + tilde
+	bspc monitor --reset-desktops One Two Three Four Five
 
-# Toggle to next layout of current desktop
+# Desktop Commands
+###################
+ctrl + alt + bracket{left,right}
+	bspc desktop --focus {prev,next}
+
+ctrl + alt + {h,l}
+        bspc desktop --focus {prev,next}
+
+super + {1-9,0}
+	bspc desktop --focus ^{1-9,10}
+
 super + t
-	bspc desktop -l next
+	bspc desktop --layout next
 
-# Balance window splits of the current desktop
-super + b
-	bspc desktop -B
+super + alt + space
+	bspc desktop --cancel-presel
 
-# Toggle {floating, fullscree} of current window
-super + {s,f}
-	bspc window -t {floating,fullscreen}
+super + shift + f ; {h,v}
+	bspc desktop --flip {horizontal,vertical}
 
-# Focus last {window, desktop}
+super + shift + r
+	bspc desktop --rotate 90
+
+super + shift + s
+	bspc desktop --equalize
+
+super + equal
+	bspc desktop --balance
+
+super + {comma,period}
+	bspc desktop --circulate {backward,forward}
+
+super + shift + t
+	bspc desktop focused --toggle floating
+
+
+# Window Commands
+##################
+super + {_,shift + }{h,j,k,l}
+	bspc window --{focus,swap} {left,down,up,right}
+
+super + {n,p}
+	bspc window --focus {next,prev}
+
 super + {grave,Tab}
-	bspc {window,desktop} -f last
-
-# Increase/Decrease window gap
-super + {minus, equal}
-        bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
-
-# Swap last focused window with current window
-super + apostrophe
-	bspc window -s last
+	bpsc control --record-history off; \
+	bspc {window,desktop} --focus last; \
+	bspc control --record-history on
 
 # Like vim's C-o and C-i except with window focus
 super + {o,i}
 	bspc control --record-history off; \
-	bspc window {older,newer} -f; \
+	bspc window  --focus {older,newer}; \
 	bspc control --record-history on
 
-# Open transplant current window to last manual window
-super + y
-	bspc window -w last.manual
+super + shift + {1-9,0}
+	bspc window --to-desktop ^{1-9,0}
 
-# Swap current window with the biggest window
-super + m
-	bspc window -s biggest
+super + ctrl + {h,j,k,l,space}
+	bspc window --presel {left,down,up,right,cancel}
 
-# {focus or swap} with window {DIR}
-super + {_,shift + }{h,j,k,l}
-	bspc window -{f,s} {left,down,up,right}
-
-# Focus {next or prev} window
-super + {n,p}
-	bspc window -f {next,prev}
-
-# Circulate the leaves {backward, foward} of current desktop
-super + {comma,period}
-	bspc desktop -C {backward,forward}
-
-# Switch focus to {left or right} desktop
-ctrl + alt + bracket{left,right}
-	bspc desktop -f {prev,next}
-
-# Swich window to manual splitting with preselect {DIR}
-super + ctrl + {h,j,k,l}
-	bspc window -p {left,down,up,right}
-
-# Cancel {window or desktop} manual splitting preselection
-super + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
-
-# Increase the size of the current window by 10 pixels in {DIR}
-super + alt + {h,j,k,l}
-	bspc window -e {left -10,down +10,up -10,right +10}
-# Decrese the size of the current window by 10 pixels in {DIR}
-super + alt + shift + {h,j,k,l}
-	bspc window -e {right -10,up +10,down -10,left +10}
-
-# Change the splitting ration of the current window to {PERCENT}
 super + ctrl + {1-9}
-	bspc window -r 0.{1-9}
+	bspc window --ratio 0.{1-9}
 
-# Send window or focus to desktop {NUM}
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,window -d} ^{1-9,10}
+# resize windows
+super + alt + {h,j,k,l} : {comma,period}
+	bspc window --edge {left,down,up,right} {-10,+10}
 
-# Select window focus with mouse
+super + r ; {h,j,k,l}
+	bspc window --rotate {left,down,up,right} 90
+
+super + {d,f,s,a}
+	bspc window --toggle {floating,fullscreen,pseudo_tiled,sticky}
+
+super + w
+	bspc window --close
+
+super + x
+	bspc window --kill
+
+
+# Query Commands
+#################
+super + shift + y
+	bspc query --tree > ~/.bspwm_save.tree
+
+# Restore Commands
+###################
+super + shift + p
+	bspc restore --tree ~/.bspwm_save.tree
+
+# Control Commands
+###################
+super + shift + v
+	bspc control --toggle-visibility
+
+
+# Pointer Commands
+###################
 ~button1
-	bspc pointer -g focus
+	bspc pointer --grab focus
 
-# {Move, resize-side, resize-corner} of window with mouse button {1-3}
-super + button1
-        bspc pointer -g move
+ctrl + button1
+	bspc pointer --grab move
 
-super + ctrl + button1
-        bspc pointer -g resize_side
+ctrl + !button1
+	bspc pointer --track %i %i
 
-super + alt + button1
-        bspc pointer -g resize_corner
+super + {shift,ctrl} + button1
+	bspc pointer --grab {resize_side,resize_corner}
+
+super + {shift,ctrl} + !button1
+	bspc pointer --track %i %i
 
 
-super + !button{1-3}
-	bspc pointer -t %i %i
+# Config Commands
+##################
+super + {minus,shift + plus}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
 
-super + @button{1-3}
-	bspc pointer -u
 
-#
-# wm independent hotkeys
-#
-
+########################
+# Miscellaneous Hotkeys
+########################
 super + Return
 	urxvt -e tmux
 
 super + space
 	~/.config/dmenu/dmenu-bind.sh
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd

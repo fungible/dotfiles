@@ -6,7 +6,7 @@ XINIT_DIR='/etc/X11/xinit/xinitrc.d'
 [ -x ${XINIT_DIR}/infinality-settings.sh ] && source ${XINIT_DIR}/infinality-settings.sh
 
 # load Xresources - solarized colors is default
-COLORS='/dev/null'
+COLORS="/dev/null"
 export ANSI_COLORS='none'
 /usr/bin/xrdb -merge ~/.Xresources; xrdb -merge "$COLORS"
 [ $COLORS = '/dev/null' ] && export ANSI_COLORS='solarized'
@@ -28,8 +28,5 @@ export ANSI_COLORS='none'
 
 # [ -x /usr/bin/xcape ] && /usr/bin/xcape -e 'Control_L=Escape'
 
-[ $1 == 'bspwm' ] && sxhkd &
-
 # start start specific xsession
-eval "dbus-launch --sh-syntax --exit-with-session $1 &> /run/user/1000/xsession.log"
-logout
+exec dbus-launch --sh-syntax --exit-with-session $1 &> /run/user/1000/xsession.log

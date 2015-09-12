@@ -2,13 +2,6 @@ servers = (
   { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
   { address = "irc.efnet.org"; chatnet = "EFNet"; port = "6667"; },
   {
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    use_ssl = "no";
-    ssl_verify = "no";
-  },
-  {
     address = "irc.gamesurge.net";
     chatnet = "GameSurge";
     port = "6667";
@@ -29,6 +22,14 @@ servers = (
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
+  },
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "7000";
+    use_ssl = "yes";
+    ssl_verify = "yes";
+    autoconnect = "yes";
   }
 );
 
