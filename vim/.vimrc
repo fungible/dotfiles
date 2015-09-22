@@ -48,10 +48,10 @@ set sidescrolloff=1
 set number              " show line number
 set numberwidth=1       " use minimum width to show line numbers
 set cursorline          " highlight the screen line of the cursor
-set shiftwidth=3        " use 3 spaces for (auto)indent
+set shiftwidth=4        " use 3 spaces for (auto)indent
 set smarttab            " turn on smarttabs
 set expandtab           " expand tabs to spaces
-set softtabstop=3       " insert 3 spaces for a tab
+set softtabstop=4       " insert 3 spaces for a tab
 set autoread            " automatically read a file when it was modified outside of VIM
 set wildmenu            " show command-line completion menu
 set modelines=1         " set modlines to 1 line instead of 5 (default)
@@ -83,7 +83,7 @@ nnoremap <leader>ir :IndentLinesReset<CR>
 
 " Airline plugin options
  let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
-let g:loaded_airline = 0   " mask airline
+let g:loaded_airline = 1   " mask airline
 let g:airline_symbols = {}
 let g:airline_symbols.whitespace = '‼'
 let g:airline_powerline_fonts = 1
@@ -160,7 +160,7 @@ if has('gui_running')
 endif
 
 " Syntax highlighting debug
-map <F10> :echo "hi<" .
+map <F2> :echo "hi<" .
          \ synIDattr(synID(line("."),col("."),1),"name") .
          \ '> trans<' .
          \ synIDattr(synID(line("."),col("."),0),"name") .
@@ -169,9 +169,11 @@ map <F10> :echo "hi<" .
          \ ">"<CR>
 
 " Some GUI fonts
-nnoremap <silent> <F9>  :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar> set lsp=-1<CR>
-nnoremap <silent> <F11> :set guifont=Input\ 8 <Bar> set lsp&<CR>
-nnoremap <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar> set lsp&<CR>
+nnoremap <silent> <F8>  :set guifont=Monaco\ 7.5 <Bar> set lsp& <CR>
+nnoremap <silent> <F9>  :set guifont=Meslo\ LG\ S\ for\ Powerline\ 7.5 <Bar> set lsp=-1 <CR>
+nnoremap <silent> <F10> :set guifont=Fira\ Mono\ for\ Powerline\ 7.5 <Bar> set lsp=-1 <CR>
+nnoremap <silent> <F11> :set guifont=Input\ 8 <Bar> set lsp& <CR>
+nnoremap <silent> <F12> :set guifont=Envy\ Code\ R\ for\ Powerline\ 8 <Bar> set lsp& <CR>
 
 " map \ and | to forward/backwards line search
 " map , to |(column goto)

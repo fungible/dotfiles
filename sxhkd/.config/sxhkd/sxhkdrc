@@ -15,7 +15,7 @@ super + shift + q
 
 # Monitor Commands
 ###################
-super + shift + tilde
+super + shift + grave
 	bspc monitor --reset-desktops One Two Three Four Five
 
 # Desktop Commands
@@ -101,13 +101,9 @@ super + x
 
 # Query Commands
 #################
-super + shift + y
-	bspc query --tree > ~/.bspwm_save.tree
 
 # Restore Commands
 ###################
-super + shift + p
-	bspc restore --tree ~/.bspwm_save.tree
 
 # Control Commands
 ###################
@@ -121,16 +117,16 @@ super + shift + v
 	bspc pointer --grab focus
 
 ctrl + button1
-	bspc pointer --grab move
+	; bspc pointer --grab move
 
-ctrl + !button1
-	bspc pointer --track %i %i
+ctrl + @button1
+	bspc pointer --ungrab
 
 super + {shift,ctrl} + button1
-	bspc pointer --grab {resize_side,resize_corner}
+	; bspc pointer --grab {resize_side,resize_corner}
 
-super + {shift,ctrl} + !button1
-	bspc pointer --track %i %i
+super + {shift,ctrl} + @button1
+	bspc pointer --ungrab
 
 
 # Config Commands
@@ -147,3 +143,6 @@ super + Return
 
 super + space
 	~/.config/dmenu/dmenu-bind.sh
+
+super + {shift,alt} + p
+	{~/.config/bspwm/panel.sh,pkill panel.sh}

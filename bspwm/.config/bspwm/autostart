@@ -1,6 +1,0 @@
-#!/bin/sh
-
-compton -cCGb &
-redshift -l 37.39:-121.86 -t 6500:2350 -g 0.8:0.9:0.9 &
-volumeicon &
-feh --no-fehbg --bg-scale /usr/share/wallpapers/diamonds_bright.jpg

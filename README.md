@@ -1,1 +1,3 @@
 # dotfiles
+
+![Preview](screenshot.png)
