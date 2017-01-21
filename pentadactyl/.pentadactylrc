@@ -33,4 +33,7 @@ highlight FontCode
    \ font-family: Liberation Mono !important;
    \ font-size: 11px !important;
 
+" uBlock Origin popup fix
+style -n ublock * #nav-bar * { visibility: visible; }
+
 " vim: set ft=pentadactyl:

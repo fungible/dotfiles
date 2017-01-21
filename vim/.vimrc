@@ -23,7 +23,7 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set listchars=tab:Ⱶ-,trail:•,extends:»,precedes:«,eol:¬
-set fillchars=stl:.,stlnc:-,vert:┆,fold:+,diff:―
+set fillchars=vert:┆,fold:+,diff:―
 set wildmode=list:longest,full
 set sessionoptions+=resize
 
@@ -68,81 +68,109 @@ set matchpairs+=<:>     " Add angle brackets to pair matching operator (%)
 set matchtime=2         " shorten matchpair highlight time (default: 5)
 set laststatus=2        " Show status line always
 " Super basic/not fancy statusline
-set statusline=\ %(%h%w%q%)\ \<\ %f\ \>\ %(%m\ %r%)%<%=%vc\ %LL\ %y
+set statusline=\ %(%h%w%q%)\ %f\ %(%m\ %r%)%<%=%vc\ %LL\ %y
 
 let g:mapleader = ';'   " mapleader maps to ';' instead of default '\'
 
 
-"" SYSTEM-WIDE plugins
+"" System-Wide Packages
+runtime! ftplugin/man.vim     " use in-window man pages
+packadd! editexisting
+packadd! matchit
+packadd! shellmenu
+
+"" System-Wide Plugins
 " IndentLine plugin options
-let g:indentLine_enabled = 0
-let g:indentLine_char = '┆'
-" toggle/reset indent lines for indentlines plugin
-nnoremap <leader>ii :IndentLinesToggle<CR>
-nnoremap <leader>ir :IndentLinesReset<CR>
+if 1
+    let g:indentLine_enabled = 0
+    let g:indentLine_char = '┆'
+    " toggle/reset indent lines for indentlines plugin
+    nnoremap <leader>ii :IndentLinesToggle<CR>
+    nnoremap <leader>ir :IndentLinesReset<CR>
+endif
 
 " Airline plugin options
- let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
-let g:loaded_airline = 1   " mask airline
-let g:airline_symbols = {}
-let g:airline_symbols.whitespace = '‼'
-let g:airline_powerline_fonts = 1
+if 1
+    let g:loaded_airline = 0   " mask airline
+    let g:airline_theme_patch_func = 'AirlineThemePatch'   " see AirlineThemePatch below
+    let g:airline_symbols = {}
+    let g:airline_symbols.whitespace = '‼'
+    let g:airline_powerline_fonts = 1
 
-call airline#parts#define_raw('file', '%f')
-call airline#parts#define('modified', {
-    \ 'condition' : '&modified',
-    \ 'text' : '(*)',
-    \ 'accent' : 'red'
-    \ })
-call airline#parts#define('modifiable', {
-    \ 'condition' : '!&modifiable',
-    \ 'text' : '(■)',
-    \ 'accent' : 'red'
-    \ })
-let g:airline_section_c = airline#section#create(['%<', 'file', 'modified', 'modifiable', ' ', 'readonly'])
+    call airline#parts#define_raw('file', '%f')
+    call airline#parts#define('modified', {
+        \ 'condition' : '&modified',
+        \ 'text' : '(*)',
+        \ 'accent' : 'red'
+        \ })
+    call airline#parts#define('modifiable', {
+        \ 'condition' : '!&modifiable',
+        \ 'text' : '(■)',
+        \ 'accent' : 'red'
+        \ })
+    let g:airline_section_c = airline#section#create(['%<', 'file', 'modified', 'modifiable', ' ', 'readonly'])
 
-" Load/enable airline extensions selectively
-let g:airline_extensions = [
-    \ 'netrw',
-    \ 'quickfix',
-    \ 'tabline',
-    \ 'whitespace',
-    \ ]
-"   \ 'undotree',
+    " Load/enable airline extensions selectively
+    let g:airline_extensions = [
+        \ 'netrw',
+        \ 'quickfix',
+        \ 'tabline',
+        \ 'whitespace',
+        \ ]
+    "   \ 'undotree',
 
-" See :help airline-tabline
-" use tabline to show buffers only not tabs
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#fnamecollapse = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#buffer_min_count = 2
+    " See :help airline-tabline
+    " use tabline to show buffers only not tabs
+    let g:airline#extensions#tabline#show_tabs = 0
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+    let g:airline#extensions#tabline#fnamecollapse = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+    let g:airline#extensions#tabline#buffer_min_count = 2
+
+    " Airline theme patch function
+    func! AirlineThemePatch(palette)
+        " index 2 is ctermfg, index 3 is ctermbg
+        if g:airline_theme == 'base16'
+            " this works for solarized coloring, maybe not others
+            for section in keys(a:palette.inactive)
+                if section =~# 'airline_\%(a\|b\|c\)'
+                    " reverse
+                    let a:palette.inactive[section][2] = 8
+                    let a:palette.inactive[section][3] = 11
+                endif
+            endfor
+            for section in keys(a:palette.inactive_modified)
+                if section =~# 'airline_\%(a\|b\|c\)'
+                    let a:palette.inactive_modified[section][2] = 3
+                endif
+            endfor
+        endif
+        if g:airline_theme == 'wombat'
+            for colors in values(a:palette.inactive)
+                let colors[2] = 16
+                let colors[3] = 239
+            endfor
+        endif
+    endfunc
+endif
 
 " NERDtree plugin options
 let g:loaded_nerd_tree = 1          " mask NERDTree
 
 
-"" LOCAL PLUGINS
-" set rtp+=~/git-repos/vim-lightline-git'
-" let g:lightline = { 'colorscheme' : 'solarized' }
+"" Local Plugins and Packages
+packadd! vim-SkyBison
+if &rtp =~ 'SkyBison'
+    nnoremap <silent> <leader>: :<C-U>call SkyBison("")<CR>
+    nnoremap <leader>b 2:<C-U>call SkyBison("b ")<CR>
+    nnoremap <leader>sb 2:<C-U>call SkyBison("sb ")<CR>
+    nnoremap <leader>vb 2:<C-U>call SkyBison("vert sb ")<CR>
+endif
 
-set rtp+=~/git-repos/vim-SkyBison
-nnoremap <silent> <leader>: :<C-U>call SkyBison("")<CR>
-nnoremap <leader>b 2:<C-U>call SkyBison("b ")<CR>
-nnoremap <leader>sb 2:<C-U>call SkyBison("sb ")<CR>
-nnoremap <leader>vb 2:<C-U>call SkyBison("vert sb ")<CR>
-
-set rtp+=~/git-repos/vim-sayonara
-nnoremap <silent> QQ :Sayonara<CR>
-
-set rtp+=~/git-repos/vim-commentary
-set rtp+=~/git-repos/vim-eunuch
-set rtp+=~/git-repos/vim-tbone
-set rtp+=~/git-repos/vim-unimpaired
-"set rtp+=~/git-repos/vim-vinegar
-set rtp+=~/git-repos/vim-vimux
-
-runtime! ftplugin/man.vim     " use in-window man pages
+packadd! vim-sayonara
+if &rtp =~ 'sayonara'
+    nnoremap <silent> QQ :Sayonara<CR>
+endif
 
 
 "" MAPPINGS
@@ -222,7 +250,6 @@ nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> QA :qa<CR>
 nnoremap <silent> QW :xa<CR>
 
-
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
@@ -255,6 +282,7 @@ if &t_Co > 2 || has("gui_running")
         let g:airline_theme = 'solarized'
     endif
 endif
+highlight StatusLine cterm=reverse,bold
 
 
 "" AUTOCOMMANDS
@@ -312,37 +340,11 @@ if !exists(":DiffOrig")
                      \ | wincmd p | diffthis
 endif
 
-" Function to delete trailing whitespace in the current buffer
-func! StripTrailWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
+" Command to delete trailing whitespace in the current buffer
+if !exists(':StripTrail')
+    command StripTrail exe 'normal mz' | %s/\s\+$//ge | exe 'normal `z'
+                       \ | nohlsearch
+endif
 
-" Airline theme patch function
-func! AirlineThemePatch(palette)
-    " index 2 is ctermfg, index 3 is ctermbg
-    if g:airline_theme == 'base16'
-        " this works for solarized coloring, maybe not others
-        for section in keys(a:palette.inactive)
-            if section =~# 'airline_\%(a\|b\|c\)'
-                " reverse
-                let a:palette.inactive[section][2] = 8
-                let a:palette.inactive[section][3] = 11
-            endif
-        endfor
-        for section in keys(a:palette.inactive_modified)
-            if section =~# 'airline_\%(a\|b\|c\)'
-                let a:palette.inactive_modified[section][2] = 3
-            endif
-        endfor
-    endif
-    if g:airline_theme == 'wombat'
-        for colors in values(a:palette.inactive)
-            let colors[2] = 16
-            let colors[3] = 239
-        endfor
-    endif
-endfunc
 
 " vim: sw=4 sts=4 et

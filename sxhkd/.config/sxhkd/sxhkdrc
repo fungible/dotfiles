@@ -1,22 +1,33 @@
-# Make sxhkd reload its configuration files:
+# BSPWM updated, generalized, and simplified the command scheme
+#
+# bspc DOMAIN [SELECTOR] COMMANDS
+#
+# DOMAIN := node | desktop | monitor | query | wm | pointer | rule | config | subscribe | quit
+# SELECTOR := NODE_SEL | DESKTOP_SEL | MONITOR_SEL
+# COMMANDS := depends on domain and are like command switches
+#
+# commented out commands are deprecated
+
+## Make sxhkd reload its configuration files:
 super + Escape
 	pkill -SIGUSR1 sxhkd
 
 
 ###########################
 # BSPWM hotkeys
-###########################
-# Long options because they are more readable
+###########################   Long options because they are more readable
 
-# Quit Command (there's only one)
+# Quit commands (there's only one)
 ##################################
 super + shift + q
 	bspc quit
 
-# Monitor Commands
+
+# Monitor commands
 ###################
 super + shift + grave
-	bspc monitor --reset-desktops One Two Three Four Five
+	bspc monitor focused --reset-desktops One Two Three Four Five
+
 
 # Desktop Commands
 ###################
@@ -32,86 +43,67 @@ super + {1-9,0}
 super + t
 	bspc desktop --layout next
 
-super + alt + space
-	bspc desktop --cancel-presel
-
-super + shift + f ; {h,v}
-	bspc desktop --flip {horizontal,vertical}
-
-super + shift + r
-	bspc desktop --rotate 90
-
-super + shift + s
-	bspc desktop --equalize
-
-super + equal
-	bspc desktop --balance
-
-super + {comma,period}
-	bspc desktop --circulate {backward,forward}
-
-super + shift + t
-	bspc desktop focused --toggle floating
 
 
-# Window Commands
+# Node commands
 ##################
 super + {_,shift + }{h,j,k,l}
-	bspc window --{focus,swap} {left,down,up,right}
+	bspc node --{focus,swap} {west,south,north,east}
 
 super + {n,p}
-	bspc window --focus {next,prev}
-
-super + {grave,Tab}
-	bpsc control --record-history off; \
-	bspc {window,desktop} --focus last; \
-	bspc control --record-history on
-
-# Like vim's C-o and C-i except with window focus
-super + {o,i}
-	bspc control --record-history off; \
-	bspc window  --focus {older,newer}; \
-	bspc control --record-history on
+	bspc node --focus {next,prev}
 
 super + shift + {1-9,0}
-	bspc window --to-desktop ^{1-9,0}
+	bspc node --to-desktop ^{1-9,0}
 
-super + ctrl + {h,j,k,l,space}
-	bspc window --presel {left,down,up,right,cancel}
+super + ctrl + {h,j,k,l}
+	bspc node --presel-dir ~{west,south,north,east}
+
+super + ctrl + space
+	bspc node --presel-dir cancel
 
 super + ctrl + {1-9}
-	bspc window --ratio 0.{1-9}
+	bspc node --presel-ratio 0.{1-9}
 
-# resize windows
-super + alt + {h,j,k,l} : {comma,period}
-	bspc window --edge {left,down,up,right} {-10,+10}
+super + alt + {h,j,k,l}
+	bspc node --move {-5 0,0 +5,0 -5,+5 0}
 
-super + r ; {h,j,k,l}
-	bspc window --rotate {left,down,up,right} 90
+super + shift + alt + {h,j,k,l} : {h,j,k,l}
+	bspc node --resize {left,bottom,top,right} {-5 0,0 +5,0 -5,+5 0}
 
-super + {d,f,s,a}
-	bspc window --toggle {floating,fullscreen,pseudo_tiled,sticky}
+super + r
+	bspc node @/ --rotate 90
 
-super + w
-	bspc window --close
+super + b
+	bspc node @/ --balance
+
+super + {a,s,d,f}
+	bspc node --state ~{tiled,pseudo_tiled,floating,fullscreen}
+
+super + shift + {a,s,d,f}
+	bspc node --flag {hidden,sticky,priate,locked}
+
+super + shift {t,m,b}
+	bspc node --layer {above,normal,below}
+
+super + q
+	bspc node focused --close
 
 super + x
-	bspc window --kill
+	bspc node focused --kill
+
 
 
 # Query Commands
 #################
+#
 
-# Restore Commands
+# WM Commands
 ###################
-
-# Control Commands
-###################
-super + shift + v
-	bspc control --toggle-visibility
+#
 
 
-# Pointer Commands
+# Pointer Commands      //deprecated; moved to config settings
 ###################
 ~button1
 	bspc pointer --grab focus

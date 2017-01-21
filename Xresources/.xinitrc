@@ -11,6 +11,9 @@ export ANSI_COLORS='none'
 /usr/bin/xrdb -merge ~/.Xresources; xrdb -merge "$COLORS"
 [ $COLORS = '/dev/null' ] && export ANSI_COLORS='solarized'
 
+# Nvidia display user settings
+#[ -r ~/.nvidia-settings-rc ] && nvidia-settings --load-config-only
+
 # turn on numlock
 /usr/bin/setleds -D +num
 
@@ -26,7 +29,9 @@ export ANSI_COLORS='none'
                  -e 'add control = Caps_Lock' \
                  -e 'keysym Caps_Lock = Control_L'
 
+
 # [ -x /usr/bin/xcape ] && /usr/bin/xcape -e 'Control_L=Escape'
 
 # start start specific xsession
-exec dbus-launch --sh-syntax --exit-with-session $1 &> /run/user/1000/xsession.log
+#exec dbus-launch --sh-syntax --exit-with-session bspwm-hook &> /run/user/1000/xsession.log
+bspwm-hook &> /run/user/1000/xsession.log

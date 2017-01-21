@@ -18,6 +18,7 @@ yellow='#b58900'
 blue='#268bd2'
 violet='#6c71c4'
 magenta='#d33682'
+orange='#cb4b16'
 
 uniq_linebuffered() {
     awk '$0 != l { print; l=$0; fflush(); }' "$@"
@@ -28,11 +29,11 @@ panel_volume() {
         local vol_status=$(amixer get Master | tail -n 1 | cut -d '[' -f 4 | sed 's/].*//g')
         local vol_level=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
         if [ "$vol_status" = 'on' ]; then
-            echo -n 'V'
+            local prefix='V'
         else
-            echo -n 'v'
+            local prefix='v'
         fi
-        echo $vol_level
+        echo $prefix$vol_level
         sleep 1 || break
     done
 }
@@ -46,8 +47,18 @@ panel_date() {
 
 panel_gputemp() {
     while true; do
-       echo -e "g$(nvidia-smi | sed -n '9p' | awk '{ print $3 }')"
+       echo "g$(nvidia-smi | sed -n '9p' | awk '{ print $3 }')"
        sleep 1 || break
+    done
+}
+
+panel_brightness() {
+    # Maybe write an ACPI rule instead, but I need to learn how first....
+    # OK so this is a bad idea, because this uses a ton of CPU cycles :<
+    local bright=''
+    while true; do
+        read bright < /sys/class/backlight/acpi_video0/brightness
+        echo "b$bright"
     done
 }
 
@@ -57,17 +68,20 @@ bspc config top_padding $(($panel_height - $(bspc config window_gap) + 6))
 (
     childpids=()
 
-    bspc control --subscribe &
+    bspc subscribe report &
     childpids+=( $! )
 
     panel_date &
     childpids+=( $! )
 
-    panel_volume &
-    childpids+=( $! )
+#    panel_volume &
+#    childpids+=( $! )
 
-    panel_gputemp &
-    childpids+=( $! )
+#    panel_gputemp &
+#    childpids+=( $! )
+
+#    panel_brightness &
+#    childpids+=( $! )
 
     trap "kill ${childpids[@]}; exit" INT TERM QUIT
     wait
@@ -135,7 +149,7 @@ while read -r line; do
         'd')
             line=${line#?}
             # Time
-            date_info="%{B$violet} %{T2}\uE0A3%{T-} ${line%%$' *'} %{B-}"
+            date_info="%{B$violet} %{T2}\uE1B9%{T-} ${line%%$' *'} %{B-}"
             # Date
             date_info+="%{B$blue} %{T2}\uE265%{T-} ${line#$'* '} %{B-}"
             ;;
@@ -152,11 +166,14 @@ while read -r line; do
             ;;
         'g')
             gputemp_info="%{B$magenta} GPU:%{T2}\uE01D%{T-}${line#?} %{B-}"
-
+            ;;
+        'b')
+            brightness="%{B$orange} %{T2}\uE1C3%{T-} ${line#?} %{B-}"
+            ;;
     esac
 
     # Flush data
-    echo -e "%{l} $layout_info $desktop_status %{r}$gputemp_info$vol_info$date_info"
+    echo -e "%{l} $layout_info $desktop_status %{r}$gputemp_info$vol_info$brightness$date_info"
 done
 
 ) 2>>/run/user/1000/xsession.log | lemonbar -g x$panel_height -f $panel_font -f $icon_font \

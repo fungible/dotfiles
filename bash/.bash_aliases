@@ -95,3 +95,7 @@ alias redb='xrdb -merge ~/.Xresources'
 # HERBSTCLIENT
 alias hc='herbstclient'
 complete -F _herbstclient_complete -o nospace hc
+
+# MPV
+_completion_loader mplayer
+complete -F _mplayer mpv
