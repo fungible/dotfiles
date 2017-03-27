@@ -74,11 +74,11 @@ bspc config top_padding $(($panel_height - $(bspc config window_gap) + 6))
     panel_date &
     childpids+=( $! )
 
-#    panel_volume &
-#    childpids+=( $! )
+     panel_volume &
+     childpids+=( $! )
 
-#    panel_gputemp &
-#    childpids+=( $! )
+     panel_gputemp &
+     childpids+=( $! )
 
 #    panel_brightness &
 #    childpids+=( $! )

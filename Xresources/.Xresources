@@ -83,7 +83,8 @@
 !URxvt*underlineColor: yellow
 
 !!-- Override infinality dpi of 96 with native dpi of 107
-Xft.dpi: 105.83
+Xft.dpi: 107
+
 
 !!-- Source Code Pro Font
 !URxvt*font: xft:Source Code Pro for Powerline:Regular:pixelsize=10
@@ -91,26 +92,21 @@ Xft.dpi: 105.83
 !URxvt*italicFont: xft:Source Code Pro:Italic:pixelsize=10
 !URxvt*boldItalicFont: xft:Source Code Pro:SemiBold:Italic:pixelsize=10
 
-!!-- ProggySquareSZ Font w/ bdf-unifont fallback
-!URxvt*lineSpace: 1
-!URxvt*font: xft:ProggySquareTTSZ for Powerline:Regular:pixelsize=16, \
-!URxvt*boldFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16, \
-!URxvt*italicFont: xft:ProggySquareTTSZ for Powerline:pixelsize=16, \
-!URxvt*boldItalicFont: xft:ProggySquareTTSZ for Powerline:Bold:pixelsize=16, \
 
 !!-- Tamzen Font w/ unicode fallback
-URxvt*font: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
-            xft:Anonymous Pro:Regular:pixelsize=13, \
-            -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
-URxvt*boldFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
-                xft:Anonymous Pro:Regular:pixelsize=13, \
-                -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
-URxvt*italicFont: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
-                  xft:Anonymous Pro:Regular:pixelsize=13, \
-                  -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
-URxvt*boldItalicFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
-                      xft:Anonymous Pro:Regular:pixelsize=13, \
-                      -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+!URxvt*font: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
+!            xft:Anonymous Pro:Regular:pixelsize=13, \
+!            -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+!URxvt*boldFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
+!                xft:Anonymous Pro:Regular:pixelsize=13, \
+!                -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+!URxvt*italicFont: -*-tamzenforpowerline-medium-r-normal-*-12-*-*-*-*-*-*-1, \
+!                  xft:Anonymous Pro:Regular:pixelsize=13, \
+!                  -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+!URxvt*boldItalicFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
+!                      xft:Anonymous Pro:Regular:pixelsize=13, \
+!                      -*-unifont-*-*-*-*-*-*-100-100-*-*-*-1
+
 
 !!-- Meslo LG S font
 !URxvt*font: xft:Meslo LG S for Powerline:pixelsize=10
@@ -118,17 +114,13 @@ URxvt*boldItalicFont: -*-tamzenforpowerline-bold-r-normal-*-12-*-*-*-*-*-*-1, \
 !URxvt*italicFont: xft:Meslo LG S for Powerline:Italic:pixelsize=10
 !URxvt*boldItalicFont: xft:Meslo LG S for Powerline:Bold Italic:pixelsize=10
 
-!!-- Anonymous Pro Font no powerline
-!URxvt*font: xft:Anonymous Pro:Regular:pixelsize=11
-!URxvt*boldFont: xft:Anonymous Pro:Bold:pixelsize=11
-!URxvt*italicFont: xft:Anonymous Pro:Italic:pixelsize=11
-!URxvt*boldItalicFont: xft:Anonymous Pro:Bold:Italic:pixelsize=11
 
-!!-- Monaco Font no powerline
-!URxvt*font: xft:Monaco:Regular:pixelsize=10
-!URxvt*boldFont: xft:Monaco:Bold:pixelsize=10
-!URxvt*italicFont: xft:Monaco:Italic:pixelsize=10
-!URxvt*boldItalicFont: xft:Monaco:Bold:Italic:pixelsize=10
+!!-- Input font
+URxvt*font: xft:Input:pixelsize=11
+URxvt*boldFont: xft:Input:Bold:pixelsize=11
+URxvt*italicFont: xft:Input:Bold:pixelsize=11
+URxvt*boldItalicFont: xff:Input:Bold Italic:pixelsize=11
+
 
 URxvt*intensityStyles: false
 URxvt*borderLess: false
@@ -156,3 +148,6 @@ URxvt*visualBell: false
 URxvt*iso14755: false
 URxvt*iso14755_52: false
 URxvt*url-launcher: /usr/bin/firefox
+
+#include ".urxvt/themes/apprentice.xresources"
+!#include ".urxvt/themes/base16-xresources/xresources/base16-onedark.Xresources"

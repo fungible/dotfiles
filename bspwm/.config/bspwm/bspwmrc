@@ -14,8 +14,8 @@ bspc config presel_feedback_color   "#b58900"
 bspc config click_to_focus      true
 bspc config swallow_first_click true
 bspc config pointer_modifier    control
-bspc config pointer_action1     resize_corner
-bspc config pointer_action2     resize_side
+bspc config pointer_action1     resize_side
+bspc config pointer_action2     resize_corner
 bspc config pointer_action3     move
 
 bspc config honor_size_hints    true
@@ -27,5 +27,12 @@ bspc rule --add Screenkey manage=off
 # Setup desktops
 bspc monitor --reset-desktops One Two Three Four Five
 
+# Autostart programs
+sxhkd &
+compton -cCGb &
+redshift -l 37.39:-121.86 -t 6500:3100 &
+volumeicon &
+feh --no-fehbg --bg-fill ~/FullMoon.jpg
+
 # Start panel.sh
-#$HOME/.config/bspwm/panel.sh &
+$HOME/.config/bspwm/panel.sh &

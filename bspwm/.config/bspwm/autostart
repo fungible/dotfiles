@@ -1,0 +1,9 @@
+#!/bin/sh
+
+on_exit() {
+    for child in $(jobs -p); do
+        jobs -p | grep -q $child && kill $child
+    done
+}
+
+trap on_exit EXIT HUP INT TERM

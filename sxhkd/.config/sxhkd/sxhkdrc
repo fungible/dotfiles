@@ -2,7 +2,7 @@
 #
 # bspc DOMAIN [SELECTOR] COMMANDS
 #
-# DOMAIN := node | desktop | monitor | query | wm | pointer | rule | config | subscribe | quit
+# DOMAIN := node | desktop | monitor | query | wm | rule | config | subscribe | quit
 # SELECTOR := NODE_SEL | DESKTOP_SEL | MONITOR_SEL
 # COMMANDS := depends on domain and are like command switches
 #
@@ -103,24 +103,6 @@ super + x
 #
 
 
-# Pointer Commands      //deprecated; moved to config settings
-###################
-~button1
-	bspc pointer --grab focus
-
-ctrl + button1
-	; bspc pointer --grab move
-
-ctrl + @button1
-	bspc pointer --ungrab
-
-super + {shift,ctrl} + button1
-	; bspc pointer --grab {resize_side,resize_corner}
-
-super + {shift,ctrl} + @button1
-	bspc pointer --ungrab
-
-
 # Config Commands
 ##################
 super + {minus,shift + plus}
@@ -134,7 +116,7 @@ super + Return
 	urxvt -e tmux
 
 super + space
-	~/.config/dmenu/dmenu-bind.sh
+	rofi -show run
 
 super + {shift,alt} + p
 	{~/.config/bspwm/panel.sh,pkill panel.sh}

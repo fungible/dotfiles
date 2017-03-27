@@ -277,9 +277,9 @@ if &t_Co > 2 || has("gui_running")
         set background=dark
         let g:airline_theme = 'gruvbox'
     else
-        colorscheme solarized
+        colorscheme apprentice
         set background=dark
-        let g:airline_theme = 'solarized'
+        let g:airline_theme = 'apprentice'
     endif
 endif
 highlight StatusLine cterm=reverse,bold
