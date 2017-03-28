@@ -3,3 +3,4 @@
 **/*.old
 urxvt/.urxvt/themes/base16-xresources
 vim/.vim/pack/git-plugins
+weechat/.weechat/**
