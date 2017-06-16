@@ -3,5 +3,7 @@
 **/*.old
 urxvt/.urxvt/themes/base16-xresources
 vim/.vim/pack/git-plugins
+weechat/.weechat/irc.conf
 weechat/.weechat/**
 geany/.config/geany/colorschemes
+
