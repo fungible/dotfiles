@@ -74,10 +74,8 @@ let g:mapleader = ';'   " mapleader maps to ';' instead of default '\'
 
 
 "" System-Wide Packages
-runtime! ftplugin/man.vim     " use in-window man pages
-packadd! editexisting
-packadd! matchit
-packadd! shellmenu
+runtime ftplugin/man.vim
+runtime macros/matchit.vim
 
 "" System-Wide Plugins
 " IndentLine plugin options
@@ -274,12 +272,12 @@ if &t_Co > 2 || has("gui_running")
 
     if has("gui_running")
         colorscheme gruvbox
-        set background=dark
+        set background=light
         let g:airline_theme = 'gruvbox'
     else
-        colorscheme apprentice
+        colorscheme solarized
         set background=dark
-        let g:airline_theme = 'apprentice'
+        let g:airline_theme = 'luna'
     endif
 endif
 highlight StatusLine cterm=reverse,bold

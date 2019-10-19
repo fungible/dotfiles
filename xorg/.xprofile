@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Nvidia display user settings
+[ -r ~/.nvidia-settings-rc ] && nvidia-settings --load-config-only
+
+# Enable DPMS (Energy Star) features
+/usr/bin/xset +dpms
+
+# Decrease keyboard repeat delay (ms)
+# Set mouse accel/threshold and turn off keyboard beep
+/usr/bin/xset mouse 45/10 70 r rate 180 40 b off

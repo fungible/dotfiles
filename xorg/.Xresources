@@ -149,5 +149,5 @@ URxvt*iso14755: false
 URxvt*iso14755_52: false
 URxvt*url-launcher: /usr/bin/firefox
 
-#include ".urxvt/themes/apprentice.xresources"
+!#include ".urxvt/themes/apprentice.xresources"
 !#include ".urxvt/themes/base16-xresources/xresources/base16-onedark.Xresources"

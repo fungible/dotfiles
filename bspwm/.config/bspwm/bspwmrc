@@ -29,8 +29,8 @@ bspc monitor --reset-desktops One Two Three Four Five
 
 # Autostart programs
 sxhkd &
-compton -cCGb &
-redshift -l 37.39:-121.86 -t 6500:3100 &
+#compton -cCGb &
+redshift -l 37.39:-121.86 -t 6500:2300 &
 volumeicon &
 feh --no-fehbg --bg-fill ~/FullMoon.jpg
 

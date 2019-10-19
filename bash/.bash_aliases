@@ -63,7 +63,7 @@ fi
 
 # ADD AN "ALERT" ALIAS FOR LONG RUNNING COMMANDS.  USE LIKE SO:
 # > sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # PACMAN ALIASES
 alias pacsync='sudo pacman -Sy'		# Sync packages from repo
@@ -78,7 +78,7 @@ alias pacorphans='pacman -Qdt'		# List orphaned packages
 alias pactoplvl='pacman -Qt'		# List top-level packages
 alias paclf='pacman -Ql'		# List files installed by given package
 alias pacowns='pacman -Qo'		# List packages that own the given file
-alias pacclean='paccache -r && paccache -ruk0'	# clean cache of packages not installed
+alias pacclean='paccache -rk2 && paccache -ruk0'	# clean cache of packages not installed
 
 # PACAUR
 alias aur='pacaur'
@@ -87,6 +87,7 @@ complete -F _pacaur -o default aur
 
 # SYSTEMCTL
 alias sysd='systemctl'
+_completion_loader systemctl
 complete -F _systemctl sysd
 
 # XRDB
@@ -95,7 +96,3 @@ alias redb='xrdb -merge ~/.Xresources'
 # HERBSTCLIENT
 alias hc='herbstclient'
 complete -F _herbstclient_complete -o nospace hc
-
-# MPV
-_completion_loader mplayer
-complete -F _mplayer mpv

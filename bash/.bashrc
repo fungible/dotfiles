@@ -9,7 +9,6 @@ export SUDO_EDITOR='/usr/bin/rvim --noplugin'
 export VISUAL='/usr/bin/vim'
 export EDITOR='/usr/bin/vim'
 export BROWSER=firefox
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoredups:ereasedups
@@ -90,6 +89,7 @@ else
     PS2='[...:>'
 fi
 unset color_prompt force_color_prompt
+unset am_i_root
 
 # < ALIAS DEFINITIONS >
 # SOURCE MAH ~/.bash_aliases

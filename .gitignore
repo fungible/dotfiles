@@ -1,9 +1,10 @@
 **/*.swp
 **/*.bak
 **/*.old
-urxvt/.urxvt/themes/base16-xresources
-vim/.vim/pack/git-plugins
+urxvt/.urxvt/themes/base16-xresources/
+vim/.vim/pack/git-plugins/
+geany/.config/geany/colorschemes/
+weechat/.weechat/*/
+weechat/.weechat/*.log
+weechat/.weechat/sec.conf
 weechat/.weechat/irc.conf
-weechat/.weechat/**
-geany/.config/geany/colorschemes
-
