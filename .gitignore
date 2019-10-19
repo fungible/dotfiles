@@ -1,6 +1,7 @@
 **/*.swp
 **/*.bak
 **/*.old
+**/*.log
 urxvt/.urxvt/themes/base16-xresources/
 vim/.vim/pack/git-plugins/
 geany/.config/geany/colorschemes/
